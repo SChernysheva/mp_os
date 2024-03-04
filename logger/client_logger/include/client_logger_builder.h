@@ -1,15 +1,22 @@
 #ifndef MATH_PRACTICE_AND_OPERATING_SYSTEMS_CLIENT_LOGGER_BUILDER_H
 #define MATH_PRACTICE_AND_OPERATING_SYSTEMS_CLIENT_LOGGER_BUILDER_H
 
-#include <logger_builder.h>
+#include "../../logger/include/logger_builder.h"
+#include "client_logger.h"
+#include <string>
+#include <map>
+
 
 class client_logger_builder final:
     public logger_builder
 {
 
-public:
+private:
+    std::map<std::string, logger::severity> data;
 
-    client_logger_builder();
+public:
+   
+   client_logger_builder();
 
     client_logger_builder(
         client_logger_builder const &other);
@@ -41,6 +48,8 @@ public:
     logger_builder *clear() override;
 
     [[nodiscard]] logger *build() const override;
+
+
 
 };
 

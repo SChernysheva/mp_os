@@ -1,14 +1,19 @@
 #ifndef MATH_PRACTICE_AND_OPERATING_SYSTEMS_CLIENT_LOGGER_H
 #define MATH_PRACTICE_AND_OPERATING_SYSTEMS_CLIENT_LOGGER_H
-
-#include <logger.h>
+#include <map>
+#include "../../logger/include/logger.h"
 #include "client_logger_builder.h"
 
 class client_logger final:
     public logger
 {
 
+    friend class client_logger_builder;
+
 public:
+
+    client_logger(
+        std::map<std::string, logger::severity> const & );
 
     client_logger(
         client_logger const &other);
@@ -23,6 +28,20 @@ public:
         client_logger &&other) noexcept;
 
     ~client_logger() noexcept final;
+
+private:
+
+    std::map<std::string, std::pair<std::ofstream * , logger::severity>> logger_streams;
+
+private:
+
+    static std::map<std::string, std::pair<std::ofstream *, size_t> > streams;
+
+private:
+
+    static std::map<logger::severity, std::string> severity_to_str;
+
+     
 
 public:
 

@@ -40,7 +40,7 @@ logger_builder *client_logger_builder::add_file_stream(
     std::string const &stream_file_path,
     logger::severity severity)
 {
-    data[stream_file_path] = severity;
+    data[stream_file_path].push_back(severity);
 
     return this; 
 }
@@ -48,7 +48,7 @@ logger_builder *client_logger_builder::add_file_stream(
 logger_builder *client_logger_builder::add_console_stream(
     logger::severity severity)
 {
-    data["console"] = severity;
+    data["console"].push_back(severity);
 
     return this; 
 }

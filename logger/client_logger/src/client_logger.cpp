@@ -2,6 +2,8 @@
 
 #include "../include/client_logger.h"
 #include <iostream>
+#include<vector>
+#include<algorithm>
 #include <fstream>
 
 std::map<std::string, std::pair<std::ofstream *, size_t> > client_logger::streams =
@@ -17,7 +19,7 @@ std::map<logger::severity, std::string> client_logger::severity_to_str = {
 };
 
 client_logger::client_logger(
-    std::map<std::string, logger::severity> const & targets)
+    std::map<std::string, std::vector<logger::severity>> const & targets)
 {
     for (auto & target : targets) //идем по парам (файл(консоль) - северити)
     {
@@ -91,7 +93,8 @@ logger const *client_logger::log(
     std::string current_dt = current_datetime_to_string();
     for (auto & logger_stream : logger_streams)
     {
-        if (logger_stream.second.second != severity)
+        //std::cout << "file/console:" << logger_stream.first << "severity:" <<  logger::severity_to_string(logger_stream.second.second) << std::endl;
+        if ( std::find(logger_stream.second.second.begin(), logger_stream.second.second.end(), severity) == logger_stream.second.second.end())
         {
             continue;
         }

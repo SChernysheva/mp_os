@@ -20,16 +20,16 @@ public:
    client_logger_builder();
 
     client_logger_builder(
-        client_logger_builder const &other);
+        client_logger_builder const &other) = delete;
 
     client_logger_builder &operator=(
-        client_logger_builder const &other);
+        client_logger_builder const &other) = delete;
 
     client_logger_builder(
-        client_logger_builder &&other) noexcept;
+        client_logger_builder &&other) noexcept = delete;
 
     client_logger_builder &operator=(
-        client_logger_builder &&other) noexcept;
+        client_logger_builder &&other) noexcept = delete;
 
     ~client_logger_builder() noexcept override;
 
@@ -44,9 +44,9 @@ public:
 
     logger_builder* transform_with_configuration(
         std::string const &configuration_file_path,
-        std::string const &configuration_path) override;
+        std::string const &configuration_path) override;//??
 
-    logger_builder *clear() override;
+    logger_builder *clear() override; //???
 
     [[nodiscard]] logger *build() const override;
 

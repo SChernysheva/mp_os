@@ -17,16 +17,16 @@ public:
         std::map<std::string, std::vector<logger::severity>> const & );
 
     client_logger(
-        client_logger const &other);
+        client_logger const &other) = delete;
 
     client_logger &operator=(
-        client_logger const &other);
+        client_logger const &other) = delete;
 
     client_logger(
-        client_logger &&other) noexcept;
+        client_logger &&other) noexcept = delete;
 
     client_logger &operator=(
-        client_logger &&other) noexcept;
+        client_logger &&other) noexcept = delete;
 
     ~client_logger() noexcept final;
 

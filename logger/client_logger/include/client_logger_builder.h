@@ -5,6 +5,7 @@
 #include "client_logger.h"
 #include <string>
 #include <map>
+#include<vector>
 
 
 class client_logger_builder final:
@@ -12,7 +13,7 @@ class client_logger_builder final:
 {
 
 private:
-    std::map<std::string, logger::severity> data;
+    std::map<std::string, std::vector<logger::severity>> data;
 
 public:
    

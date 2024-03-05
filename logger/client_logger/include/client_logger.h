@@ -1,6 +1,7 @@
 #ifndef MATH_PRACTICE_AND_OPERATING_SYSTEMS_CLIENT_LOGGER_H
 #define MATH_PRACTICE_AND_OPERATING_SYSTEMS_CLIENT_LOGGER_H
 #include <map>
+#include <vector>
 #include "../../logger/include/logger.h"
 #include "client_logger_builder.h"
 
@@ -13,7 +14,7 @@ class client_logger final:
 public:
 
     client_logger(
-        std::map<std::string, logger::severity> const & );
+        std::map<std::string, std::vector<logger::severity>> const & );
 
     client_logger(
         client_logger const &other);
@@ -31,7 +32,7 @@ public:
 
 private:
 
-    std::map<std::string, std::pair<std::ofstream * , logger::severity>> logger_streams;
+    std::map<std::string, std::pair<std::ofstream * , std::vector<logger::severity>>> logger_streams;
 
 private:
 

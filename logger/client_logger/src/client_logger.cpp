@@ -23,7 +23,7 @@ client_logger::client_logger(
 {
     for (auto & target : targets) //идем по парам (файл(консоль) - северити)
     {
-        auto global_stream = streams.find(target.first); //глобал стрим - мап(имя файла и пара выходной файл - кол-во использований)
+        auto global_stream = streams.find(target.first);
         std::ofstream *stream = nullptr; 
 
         if (global_stream == streams.end()) //если не нашли такой выходной файл
@@ -34,9 +34,9 @@ client_logger::client_logger(
                 stream->open(target.first); //открываем файл с именем ключа
             }
 
-            streams.insert(std::make_pair(target.first, std::make_pair(stream, 1))); //помещаем в поток с числом использований -1 
+            streams.insert(std::make_pair(target.first, std::make_pair(stream, 1))); 
         }
-        else //если нашли то берем поток вывода за стрим и потом увеличиваем кол-во
+        else //если нашли то берем поток вывода за стрим
         {
             stream = global_stream->second.first;
             global_stream->second.second++;
@@ -48,25 +48,7 @@ client_logger::client_logger(
 
 
 
-client_logger::client_logger(
-    client_logger const &other)
-{
-    //throw not_implemented("client_logger::client_logger(client_logger const &other)", "your code should be here...");
-}
-
-client_logger &client_logger::operator=(
-    client_logger const &other)
-{
-    //throw not_implemented("client_logger &client_logger::operator=(client_logger const &other)", "your code should be here...");
-}
-
-client_logger::client_logger(
-    client_logger &&other) noexcept
-{
-    //throw not_implemented("client_logger::client_logger(client_logger &&other) noexcept", "your code should be here...");
-}
-
-client_logger::~client_logger() noexcept //??????????????
+client_logger::~client_logger() noexcept 
 {
     for (auto & logger_stream : logger_streams)
     {
@@ -93,7 +75,6 @@ logger const *client_logger::log(
     std::string current_dt = current_datetime_to_string();
     for (auto & logger_stream : logger_streams)
     {
-        //std::cout << "file/console:" << logger_stream.first << "severity:" <<  logger::severity_to_string(logger_stream.second.second) << std::endl;
         if ( std::find(logger_stream.second.second.begin(), logger_stream.second.second.end(), severity) == logger_stream.second.second.end())
         {
             continue;

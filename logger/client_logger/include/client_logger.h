@@ -2,8 +2,14 @@
 #define MATH_PRACTICE_AND_OPERATING_SYSTEMS_CLIENT_LOGGER_H
 #include <map>
 #include <vector>
+#include <ctime>
+#include <chrono>
+#include <iostream>
+#include <fstream>
 #include "../../logger/include/logger.h"
 #include "client_logger_builder.h"
+#include "nlohmann/json.hpp"
+
 
 class client_logger final:
     public logger
@@ -29,6 +35,7 @@ public:
         client_logger &&other) noexcept = delete;
 
     ~client_logger() noexcept final;
+
 
 private:
 

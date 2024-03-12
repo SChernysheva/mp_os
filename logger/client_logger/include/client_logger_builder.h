@@ -44,9 +44,9 @@ public:
 
     logger_builder* transform_with_configuration(
         std::string const &configuration_file_path,
-        std::string const &configuration_path) override;//??
+        std::string const &configuration_path) override;
 
-    logger_builder *clear() override; //???
+    logger_builder *clear() override; 
 
     [[nodiscard]] logger *build() const override;
 

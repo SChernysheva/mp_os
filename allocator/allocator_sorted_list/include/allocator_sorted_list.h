@@ -14,7 +14,8 @@ class allocator_sorted_list final:
     private logger_guardant,
     private typename_holder
 {
-
+//список свободных блоков(в каждом хранится инфа о размере блока и о ардесе след блока)
+//начало - аллокатор(откуда взяты) - логгер - размер всей памяти - указатель на первый свободный
 private:
 
     void *_trusted_memory;
@@ -73,6 +74,9 @@ private:
 
     inline std::string get_typename() const noexcept override;
 
+
+private:
+    size_t get_ancillary_space_size() const noexcept;
 };
 
 #endif //MATH_PRACTICE_AND_OPERATING_SYSTEMS_ALLOCATOR_ALLOCATOR_SORTED_LIST_H

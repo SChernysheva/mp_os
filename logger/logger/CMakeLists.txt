@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.16.3)
 project(mp_os_lggr_lggr)
+
 
 add_library(
         mp_os_lggr_lggr

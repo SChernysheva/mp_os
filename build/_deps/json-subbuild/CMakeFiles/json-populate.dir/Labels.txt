@@ -1,0 +1,14 @@
+# Target labels
+ json-populate
+# Source files and their labels
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/CMakeFiles/json-populate
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/CMakeFiles/json-populate.rule
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/CMakeFiles/json-populate-complete.rule
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-build.rule
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-configure.rule
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-download.rule
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-install.rule
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-mkdir.rule
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-patch.rule
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-test.rule
+/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-update.rule

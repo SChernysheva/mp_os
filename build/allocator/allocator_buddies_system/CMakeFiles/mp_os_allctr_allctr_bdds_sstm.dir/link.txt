@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmp_os_allctr_allctr_bdds_sstm.a CMakeFiles/mp_os_allctr_allctr_bdds_sstm.dir/src/allocator_buddies_system.cpp.o
+/usr/bin/ranlib libmp_os_allctr_allctr_bdds_sstm.a

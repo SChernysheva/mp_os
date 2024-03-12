@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmp_os_allctr_allctr.a CMakeFiles/mp_os_allctr_allctr.dir/src/allocator_guardant.cpp.o CMakeFiles/mp_os_allctr_allctr.dir/src/allocator_test_utils.cpp.o
+/usr/bin/ranlib libmp_os_allctr_allctr.a

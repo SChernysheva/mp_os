@@ -1,11 +1,10 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.16.3)
 project(mp_os_lggr_clnt_lggr)
 
 add_subdirectory(tests)
 
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
 FetchContent_MakeAvailable(json)
-
 add_library(
         mp_os_lggr_clnt_lggr
         src/client_logger.cpp

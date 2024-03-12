@@ -10,6 +10,8 @@ class server_logger final:
 
 public:
 
+    void init(void);
+    server_logger();
     server_logger(
         server_logger const &other);
 

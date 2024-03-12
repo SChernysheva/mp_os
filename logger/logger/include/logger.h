@@ -5,7 +5,6 @@
 
 class logger
 {
-
 public:
 
     enum class severity
@@ -47,6 +46,8 @@ public:
 
     logger const *critical(
         std::string const &message) const noexcept;
+public:
+    severity int_to_sever(int x);
 
 protected:
 

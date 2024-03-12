@@ -1,0 +1,14 @@
+{
+    "logger":
+    [
+        {
+            "file" : "file2.txt",
+            "severity" : 1
+        },
+        {
+            "file" : "file1.txt",
+            "severity" : 0
+        }
+    ]
+}
+

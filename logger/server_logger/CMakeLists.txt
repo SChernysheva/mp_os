@@ -1,11 +1,22 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.16.3)
 project(mp_os_lggr_srvr_lggr)
 
 add_subdirectory(tests)
 
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
 FetchContent_MakeAvailable(json)
+# Добавляем библиотеку rt
+find_library(RT_LIBRARY rt)
 
+# Проверяем, была ли найдена библиотека rt
+if(RT_LIBRARY)
+    message(STATUS "Found librt: ${RT_LIBRARY}")
+else()
+    message(FATAL_ERROR "librt not found")
+endif()
+
+# Линковка с библиотекой rt
+target_link_libraries(mp_os_lggr_lggr PRIVATE ${RT_LIBRARY})
 add_library(
         mp_os_lggr_srvr_lggr
         src/server_logger.cpp

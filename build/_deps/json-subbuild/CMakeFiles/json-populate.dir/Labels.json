@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/CMakeFiles/json-populate"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/CMakeFiles/json-populate.rule"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/CMakeFiles/json-populate-complete.rule"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-build.rule"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-configure.rule"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-download.rule"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-install.rule"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-mkdir.rule"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-patch.rule"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-test.rule"
+		},
+		{
+			"file" : "/mnt/c/labs/laba5/mp_os/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"json-populate"
+		],
+		"name" : "json-populate"
+	}
+}

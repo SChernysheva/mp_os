@@ -1,28 +1,55 @@
 #ifndef MATH_PRACTICE_AND_OPERATING_SYSTEMS_CLIENT_LOGGER_H
 #define MATH_PRACTICE_AND_OPERATING_SYSTEMS_CLIENT_LOGGER_H
-
-#include <logger.h>
+#include <map>
+#include <vector>
+#include <ctime>
+#include <chrono>
+#include <iostream>
+#include <fstream>
+#include "../../logger/include/logger.h"
 #include "client_logger_builder.h"
+#include "nlohmann/json.hpp"
+
 
 class client_logger final:
     public logger
 {
 
+    friend class client_logger_builder;
+
 public:
 
     client_logger(
-        client_logger const &other);
-
-    client_logger &operator=(
-        client_logger const &other);
+        std::map<std::string, std::vector<logger::severity>> const & );
 
     client_logger(
-        client_logger &&other) noexcept;
+        client_logger const &other) = delete;
 
     client_logger &operator=(
-        client_logger &&other) noexcept;
+        client_logger const &other) = delete;
+
+    client_logger(
+        client_logger &&other) noexcept = delete;
+
+    client_logger &operator=(
+        client_logger &&other) noexcept = delete;
 
     ~client_logger() noexcept final;
+
+
+private:
+
+    std::map<std::string, std::pair<std::ofstream * , std::vector<logger::severity>>> logger_streams;
+
+private:
+
+    static std::map<std::string, std::pair<std::ofstream *, size_t> > streams;
+
+private:
+
+    static std::map<logger::severity, std::string> severity_to_str;
+
+     
 
 public:
 

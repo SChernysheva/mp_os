@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.16.3)
 project(mp_os_lggr_clnt_lggr_tests)
 
 include(FetchContent)
@@ -14,7 +14,8 @@ FetchContent_MakeAvailable(
 
 add_executable(
         mp_os_lggr_clnt_lggr_tests
-        client_logger_tests.cpp)
+        client_logger_tests.cpp
+        )
 target_link_libraries(
         mp_os_lggr_clnt_lggr_tests
         PRIVATE

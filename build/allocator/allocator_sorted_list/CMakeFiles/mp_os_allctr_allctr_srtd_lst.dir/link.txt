@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmp_os_allctr_allctr_srtd_lst.a CMakeFiles/mp_os_allctr_allctr_srtd_lst.dir/src/allocator_sorted_list.cpp.o
+/usr/bin/ranlib libmp_os_allctr_allctr_srtd_lst.a

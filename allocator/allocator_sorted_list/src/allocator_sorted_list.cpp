@@ -61,20 +61,21 @@ inline void allocator_sorted_list::set_fit_mode(
 
 inline allocator *allocator_sorted_list::get_allocator() const
 {
-    throw not_implemented("inline allocator *allocator_sorted_list::get_allocator() const", "your code should be here...");
+    return *reinterpret_cast<allocator**>(_trusted_memory);
 }
 
 std::vector<allocator_test_utils::block_info> allocator_sorted_list::get_blocks_info() const noexcept
 {
-    throw not_implemented("std::vector<allocator_test_utils::block_info> allocator_sorted_list::get_blocks_info() const noexcept", "your code should be here...");
+    //throw not_implemented("std::vector<allocator_test_utils::block_info> allocator_sorted_list::get_blocks_info() const noexcept", "your code should be here...");
 }
 
 inline logger *allocator_sorted_list::get_logger() const
 {
-    throw not_implemented("inline logger *allocator_sorted_list::get_logger() const", "your code should be here...");
+    //return *reinterpret_cast<logger**>(reinterpret_cast<unsigned char*>(_trusted_memory) + sizeof(allocator*));
+    return *reinterpret_cast<logger**>(*reinterpret_cast<allocator**>(_trusted_memory) + 1);
 }
 
 inline std::string allocator_sorted_list::get_typename() const noexcept
 {
-    throw not_implemented("inline std::string allocator_sorted_list::get_typename() const noexcept", "your code should be here...");
+    //throw not_implemented("inline std::string allocator_sorted_list::get_typename() const noexcept", "your code should be here...");
 }

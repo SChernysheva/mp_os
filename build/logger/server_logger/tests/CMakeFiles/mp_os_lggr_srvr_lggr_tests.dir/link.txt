@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/mp_os_lggr_srvr_lggr_tests.dir/server_logger_tests.cpp.o -o mp_os_lggr_srvr_lggr_tests-1.0  ../../../lib/libgtest_main.a ../../../common/libmp_os_cmmn.a ../../logger/libmp_os_lggr_lggr.a ../libmp_os_lggr_srvr_lggr.a ../../../lib/libgtest.a -lpthread ../../../common/libmp_os_cmmn.a ../../logger/libmp_os_lggr_lggr.a /usr/lib/x86_64-linux-gnu/librt.so 

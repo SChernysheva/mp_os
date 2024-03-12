@@ -50,8 +50,7 @@ logger_builder *server_logger_builder::add_console_stream(
 }
 
 logger_builder* server_logger_builder::transform_with_configuration(
-    std::string const &configuration_file_path,
-    std::string const &configuration_path)
+    std::string const &configuration_file_path, std::string const &configuration_path)
 {
     throw not_implemented("logger_builder* server_logger_builder::transform_with_configuration(std::string const &configuration_file_path, std::string const &configuration_path)", "your code should be here...");
 }

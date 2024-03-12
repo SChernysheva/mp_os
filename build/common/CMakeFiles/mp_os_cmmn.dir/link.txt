@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmp_os_cmmn.a CMakeFiles/mp_os_cmmn.dir/src/not_implemented.cpp.o CMakeFiles/mp_os_cmmn.dir/src/operation_not_supported.cpp.o
+/usr/bin/ranlib libmp_os_cmmn.a

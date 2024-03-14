@@ -37,6 +37,24 @@ logger const *logger::critical(
     return log(message, logger::severity::critical);
 }
 
+logger::severity int_to_sever(int x)
+{
+    switch (x)
+    {
+        case 0:
+            return logger::severity::trace;
+        case 1:
+            return logger::severity::debug;
+        case 2:
+            return logger::severity::information;
+        case 3:
+            return logger::severity::warning;
+        case 4:
+            return logger::severity::error;
+        case 5:
+            return logger::severity::critical;
+    }
+}
 std::string logger::severity_to_string(
     logger::severity severity)
 {
@@ -65,6 +83,27 @@ std::string logger::current_datetime_to_string() noexcept
 
     std::ostringstream result_stream;
     result_stream << std::put_time(std::localtime(&time), "%d.%m.%Y %H:%M:%S");
+
+    return result_stream.str();
+}
+
+
+std::string logger::current_date_to_string() noexcept
+{
+    auto time = std::time(nullptr);
+
+    std::ostringstream result_stream;
+    result_stream << std::put_time(std::localtime(&time), "%d.%m.%Y");
+
+    return result_stream.str();
+}
+
+std::string logger::current_time_to_string() noexcept
+{
+    auto time = std::time(nullptr);
+
+    std::ostringstream result_stream;
+    result_stream << std::put_time(std::localtime(&time), "%H:%M:%S");
 
     return result_stream.str();
 }

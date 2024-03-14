@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
-#include "server_logger.h"
+//#include <gtest/gtest.h>
+#include "../include/server_logger.h"
 
 
 int main(

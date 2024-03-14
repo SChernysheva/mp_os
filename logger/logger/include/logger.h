@@ -5,7 +5,6 @@
 
 class logger
 {
-
 public:
 
     enum class severity
@@ -47,6 +46,8 @@ public:
 
     logger const *critical(
         std::string const &message) const noexcept;
+public:
+    severity int_to_sever(int x);
 
 protected:
 
@@ -54,6 +55,10 @@ protected:
         logger::severity severity);
 
     static std::string current_datetime_to_string() noexcept;
+
+    static std::string current_date_to_string() noexcept;
+
+    static std::string current_time_to_string() noexcept;
 
 };
 

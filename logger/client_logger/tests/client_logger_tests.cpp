@@ -11,12 +11,13 @@ int main(
     
     logger_builder* builder = new client_logger_builder(); //map   key-path  value - pair<path, severity> 
 
-    logger *constructed_logger = builder
+     logger *constructed_logger = builder
         ->add_file_stream("file1.txt", logger::severity::information)
         ->add_file_stream("file1.txt", logger::severity::debug)
         ->add_file_stream("file2.txt", logger::severity::warning)
         ->add_console_stream(logger::severity::warning)
         ->add_console_stream(logger::severity::debug)
+        ->set_options("%t %s %m %d")
         ->build();
 
     // logger* constructed_logger = builder
@@ -24,9 +25,7 @@ int main(
     // ->build();
 
 
-
-    constructed_logger->warning("Деление на 0!!");
-    constructed_logger->debug("Супер длинное сообщение которое я хочу чтобы было в файле номер 1 и в консоле лялялялялял");
+    constructed_logger->debug("Supep puper long message for testing packets and logger and severity smiiile face");
     constructed_logger->warning("Wanring!");
     constructed_logger->warning("file1");
     constructed_logger->warning("file2");

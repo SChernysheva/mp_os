@@ -10,9 +10,9 @@
 #include <fstream>
 #define NAME "/QUEUE"
 #define PACKET_SIZE 10
-//#define IMPLEMENTATION_FOR_UNIX 1
+#define IMPLEMENTATION_FOR_UNIX 1
  //#define IMPLEMENTATION_FOR_WIN 1
-#define IMPLEMENTATION_CLIENT 1
+//#define IMPLEMENTATION_CLIENT 1
 
 std::map<std::string, std::pair<std::ofstream *, size_t> > client_logger::streams =
     std::map<std::string, std::pair<std::ofstream *, size_t> >();
@@ -79,7 +79,6 @@ client_logger::~client_logger() noexcept
 
 struct my_message
 {
-    char opt[25];
     int count_packets;
     int num_of_packet;
     char text[100];
@@ -116,7 +115,6 @@ struct my_message
                 for (int i = 0; i < num_packets; i++)
                 {
                     my_message msg;
-                    strcpy(msg.opt, this->opt.c_str());
                     char packet[PACKET_SIZE + 1]; // +1 для завершающего символа null
                     int startIndex = i * PACKET_SIZE;
                     int endIndex = std::min(startIndex + PACKET_SIZE, message_size);
@@ -146,7 +144,6 @@ struct my_message
                 for (int i = 0; i < num_packets; i++)
                 {
                     my_message msg;
-                    strcpy(msg.opt, this->opt.c_str());
                     char packet[PACKET_SIZE + 1]; // +1 для завершающего символа null
                     int startIndex = i * PACKET_SIZE;
                     int endIndex = std::min(startIndex + PACKET_SIZE, message_size);

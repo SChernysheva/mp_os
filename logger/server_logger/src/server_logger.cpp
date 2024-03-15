@@ -45,7 +45,6 @@ server_logger::~server_logger() noexcept
 
 struct my_message
 {
-    char opt[25];
     int count_packets;
     int num_of_packet;
     char text[100];
@@ -87,68 +86,12 @@ void server_logger::init(void)
                 {
                     if (strcmp(received_msg.file_path, "console") == 0)
                     {
-                        for (int i = 0; received_msg.opt[i] != '\0' && received_msg.opt[i + 1] != '\0'; i++)
-                        {
-                            if (received_msg.opt[i] != '%')
-                                std::cout << received_msg.opt[i];
-
-                            if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 'd')
-                            {
-                                std::cout << "[" << logger::current_date_to_string() << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 't')
-                            {
-                                std::cout << "[" << logger::current_time_to_string() << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 's')
-                            {
-                                std::cout << "[" << severity_to_string(received_msg.sever) << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 'm')
-                            {
-                                std::cout << received_msg.text;
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%')
-                                std::cout << "%";
-                        }
-                        std::cout << std::endl;
+                        std::cout << "[" << current_dt << "]" << "[" << severity_to_string(received_msg.sever) << "] " << received_msg.text << std::endl;
                     }
                     else 
                     {
                         std::fstream str(received_msg.file_path, std::ios::in | std::ios::out | std::ios::app);
-                        for (int i = 0; received_msg.opt[i] != '\0' && received_msg.opt[i + 1] != '\0'; i++)
-                        {
-                            if (received_msg.opt[i] != '%')
-                                str << received_msg.opt[i];
-
-                            if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 'd')
-                            {
-                                str << "[" << logger::current_date_to_string() << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 't')
-                            {
-                                str << "[" << logger::current_time_to_string() << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 's')
-                            {
-                                str << "[" << severity_to_string(received_msg.sever) << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 'm')
-                            {
-                                str << received_msg.text;
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%')
-                                str << "%";
-                        }
-                        str << std::endl;
+                        str << "[" << current_dt << "]" << "[" << severity_to_string(received_msg.sever) << "] " << received_msg.text << std::endl;
                     }
                 }
                 else
@@ -162,40 +105,13 @@ void server_logger::init(void)
                     file.seekg(std::ios::beg); //back to the start
                     if (strcmp(received_msg.file_path, "console") == 0)
                     {
-                        for (int i = 0; received_msg.opt[i] != '\0' && received_msg.opt[i + 1] != '\0'; i++)
+                        std::cout << "[" << current_dt << "]" << "[" << severity_to_string(received_msg.sever) << "] ";
+                        std::string line;
+                        while (std::getline(file, line)) // get info from cash file and write it
                         {
-                            if (received_msg.opt[i] != '%')
-                                std::cout << received_msg.opt[i];
-
-                            if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 'd')
-                            {
-                                std::cout << "[" << logger::current_date_to_string() << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 't')
-                            {
-                                std::cout << "[" << logger::current_time_to_string() << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 's')
-                            {
-                                std::cout << "[" << severity_to_string(received_msg.sever) << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 'm')
-                            {
-                                std::string line;
-                                while (std::getline(file, line)) // get info from cash file and write it
-                                {
-                                    if (!file.eof()) std::cout << line << std::endl;
-                                    else std::cout << line;
-                                }
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%')
-                                std::cout << "%";
+                            std::cout << line << std::endl;
                         }
-                        std::cout << std::endl;
+
                         file.close();
                         std::remove(file_path_cash.c_str()); // remove cash file
     
@@ -203,40 +119,15 @@ void server_logger::init(void)
                     else
                     {
                         std::fstream str(received_msg.file_path, std::ios::in | std::ios::out | std::ios::app); //in file from file
-                        for (int i = 0; received_msg.opt[i] != '\0' && received_msg.opt[i + 1] != '\0'; i++)
+                        str << "[" << current_dt << "]" << "[" << severity_to_string(received_msg.sever) << "] ";
+                        std::string line;
+                        while (std::getline(file, line)) // get info from cash file and write it
                         {
-                            if (received_msg.opt[i] != '%')
-                                str << received_msg.opt[i];
-
-                            if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 'd')
-                            {
-                                str << "[" << logger::current_date_to_string() << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 't')
-                            {
-                                str << "[" << logger::current_time_to_string() << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 's')
-                            {
-                                str << "[" << severity_to_string(received_msg.sever) << "]";
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%' && received_msg.opt[i + 1] == 'm')
-                            {
-                                std::string line;
-                                while (std::getline(file, line))
-                                {
-                                    if (!file.eof()) str << line << std::endl;
-                                    else str << line;
-                                }
-                                i++;
-                            }
-                            else if (received_msg.opt[i] == '%')
-                                str << "%";
+                            str << line << std::endl;
                         }
-                        str << std::endl;
+
+                        file.close();
+                        std::remove(file_path_cash.c_str()); // remove cash file
                         file.close();
                         std::remove(file_path_cash.c_str());
                     }

@@ -13,16 +13,16 @@ public:
     void init(void);
     server_logger();
     server_logger(
-        server_logger const &other);
+        server_logger const &other) = delete;
 
     server_logger &operator=(
-        server_logger const &other);
+        server_logger const &other) = delete;
 
     server_logger(
-        server_logger &&other) noexcept;
+        server_logger &&other) noexcept = delete;
 
     server_logger &operator=(
-        server_logger &&other) noexcept;
+        server_logger &&other) noexcept = delete;
 
     ~server_logger() noexcept final;
 

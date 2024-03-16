@@ -10,8 +10,8 @@
 #include <fstream>
 #define NAME "/QUEUE"
 #define PACKET_SIZE 10
-#define IMPLEMENTATION_FOR_UNIX 1
- //#define IMPLEMENTATION_FOR_WIN 1
+//#define IMPLEMENTATION_FOR_UNIX 1
+ #define IMPLEMENTATION_FOR_WIN 1
 //#define IMPLEMENTATION_CLIENT 1
 
 std::map<std::string, std::pair<std::ofstream *, size_t> > client_logger::streams =
@@ -252,12 +252,86 @@ struct my_message
         return this;
     }
 #elif defined(IMPLEMENTATION_FOR_WIN)
-
+#include <windows.h>
 logger const *client_logger::log(
-        const std::string &text,
-        logger::severity severity) const noexcept
-    {}
+    const std::string &text,
+    logger::severity severity) const noexcept
+{
+    static int id_1 = 0;
+    HANDLE hMapFile = OpenFileMapping(FILE_MAP_ALL_ACCESS, FALSE, "SharedMemory");
+    LPVOID pData = MapViewOfFile(hMapFile, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(my_message));
+    HANDLE hSemaphore = OpenSemaphore(SEMAPHORE_ALL_ACCESS, FALSE, "Semaphore");
 
+    if (hMapFile && pData && hSemaphore)
+    {
+        for (auto &logger_stream : logger_streams)
+        {
+            if (std::find(logger_stream.second.second.begin(), logger_stream.second.second.end(), severity) == logger_stream.second.second.end())
+            {
+                continue;
+            }
+            //WaitForSingleObject(hSemaphore, INFINITE);
+            if (logger_stream.second.first == nullptr) // if console
+            {
+                int message_size = std::strlen(text.c_str());
+                int num_packets = (message_size + PACKET_SIZE - 1) / PACKET_SIZE;
+                for (int i = 0; i < num_packets; i++)
+                {
+                    WaitForSingleObject(hSemaphore, INFINITE);
+                    my_message *msg = (my_message *)pData;
+                    //memset(msg->text, 0, sizeof(char) * 100);
+                    char packet[PACKET_SIZE + 1]; // +1 для завершающего символа null
+                    int startIndex = i * PACKET_SIZE;
+                    int endIndex = std::min(startIndex + PACKET_SIZE, message_size);
+                    memcpy(packet, &text[startIndex], endIndex - startIndex);
+                    packet[endIndex - startIndex] = '\0';
+                    strcpy(msg->text, packet);
+                    strcpy(msg->file_path, "console");
+                    // msg->id_process = getpid();
+                    msg->num_of_packet = i + 1;
+                    msg->count_packets = num_packets;
+                    msg->sever = severity;
+                    msg->id_ = id_1;
+                    ReleaseSemaphore(hSemaphore, 1, NULL);
+                }
+            }
+            else // if file
+            {
+                int message_size = std::strlen(text.c_str());
+                int num_packets = (message_size + PACKET_SIZE - 1) / PACKET_SIZE; // Вычисляем количество пакетов
+                for (int i = 0; i < num_packets; i++)
+                {
+                    WaitForSingleObject(hSemaphore, INFINITE);
+                    my_message *msg = (my_message *)pData;
+                    //memset(msg->text, 0, sizeof(char) * 100);
+                    char packet[PACKET_SIZE + 1]; // +1 для завершающего символа null
+                    int startIndex = i * PACKET_SIZE;
+                    int endIndex = std::min(startIndex + PACKET_SIZE, message_size);
 
+                    memcpy(packet, &text[startIndex], endIndex - startIndex);
+                    packet[endIndex - startIndex] = '\0'; // Завершаем строку null-символом
+                    strcpy(msg->text, packet);
+                    strcpy(msg->file_path, logger_stream.first.c_str());
+                    // msg.id_process = getpid();
+                    msg->num_of_packet = i + 1;
+                    msg->count_packets = num_packets;
+                    msg->sever = severity;
+                    msg->id_ = id_1;
+                    ReleaseSemaphore(hSemaphore, 1, NULL);
+                }
+            }
+            id_1++;
+        }
+    WaitForSingleObject(hSemaphore, INFINITE);
+    my_message *msg = (my_message *)pData;
+    msg->num_of_packet = 0;
+    ReleaseSemaphore(hSemaphore, 1, NULL);
+    UnmapViewOfFile(pData);
+    CloseHandle(hMapFile);
+    CloseHandle(hSemaphore);
+
+    }
+    return this;
+}
 
 #endif

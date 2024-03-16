@@ -11,31 +11,9 @@
 
 #define NAME "/QUEUE"
 #define PACKET_SIZE 10
-//#define IMPLEMENTATION_FOR_UNIX 1
-// #define IMPLEMENTATION_FOR_WIN 1
+
 server_logger::server_logger(){};
-server_logger::server_logger(
-    server_logger const &other)
-{
-    throw not_implemented("server_logger::server_logger(server_logger const &other)", "your code should be here...");
-}
-server_logger &server_logger::operator=(
-    server_logger const &other)
-{
-    throw not_implemented("server_logger &server_logger::operator=(server_logger const &other)", "your code should be here...");
-}
 
-server_logger::server_logger(
-    server_logger &&other) noexcept
-{
-    throw not_implemented("server_logger::server_logger(server_logger &&other) noexcept", "your code should be here...");
-}
-
-server_logger &server_logger::operator=(
-    server_logger &&other) noexcept
-{
-    throw not_implemented("server_logger &server_logger::operator=(server_logger &&other) noexcept", "your code should be here...");
-}
 
 server_logger::~server_logger() noexcept
 {
@@ -51,6 +29,7 @@ struct my_message
     char file_path[50];
     logger::severity sever;
     int id_;
+    char pid[20];
 };
 
 #ifdef __linux__
@@ -194,7 +173,7 @@ void server_logger::init(void)
                 }
                 else
                 {
-                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg->id_) + ".txt"; // (if last packet) find a file for cash info from packets
+                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg->id_) + received_msg->pid + ".txt"; // (if last packet) find a file for cash info from packets
                     std::fstream file(file_path_cash, std::ios::in | std::ios::out | std::ios::app);
                     if (file.is_open())
                     {
@@ -233,13 +212,13 @@ void server_logger::init(void)
                 if (received_msg->num_of_packet == 1) // if there is first packet and count_packets > 1
                 {
                     // make a new cash file and write
-                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg->id_) + ".txt";
+                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg->id_) + received_msg->pid + ".txt";
                     std::fstream file(file_path_cash, std::ios::in | std::ios::out | std::ios::app);
                     file << received_msg->text;
                 }
                 else
                 {
-                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg->id_) + ".txt";
+                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg->id_) + received_msg->pid + ".txt";
                     std::ofstream file(file_path_cash, std::ios::app);
                     file << received_msg->text;
                 }

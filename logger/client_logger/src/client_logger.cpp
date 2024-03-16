@@ -10,8 +10,8 @@
 #include <fstream>
 #define NAME "/QUEUE"
 #define PACKET_SIZE 10
-//#define IMPLEMENTATION_FOR_UNIX 1
- #define IMPLEMENTATION_FOR_WIN 1
+#define IMPLEMENTATION_FOR_UNIX 1
+ //#define IMPLEMENTATION_FOR_WIN 1
 //#define IMPLEMENTATION_CLIENT 1
 
 std::map<std::string, std::pair<std::ofstream *, size_t> > client_logger::streams =
@@ -84,6 +84,7 @@ struct my_message
     char text[100];
     char file_path[50];
     logger::severity sever;
+    char pid[20];
     int id_;
 }; 
 
@@ -123,7 +124,10 @@ struct my_message
                     packet[endIndex - startIndex] = '\0'; 
                     strcpy(msg.text, packet);
                     strcpy(msg.file_path, "console");
-                    // msg.id_process = getpid();
+                    pid_t pid = getpid();
+                    std::string pid_str = std::to_string(pid);
+                    strncpy(msg.pid, pid_str.c_str(), 20);
+                
                     msg.num_of_packet = i + 1;
                     msg.count_packets = num_packets;
                     msg.sever = severity;
@@ -152,7 +156,9 @@ struct my_message
                     packet[endIndex - startIndex] = '\0'; // Завершаем строку null-символом
                     strcpy(msg.text, packet);
                     strcpy(msg.file_path, logger_stream.first.c_str());
-                    // msg.id_process = getpid();
+                    pid_t pid = getpid();
+                    std::string pid_str = std::to_string(pid);
+                    strncpy(msg.pid, pid_str.c_str(), 20);
                     msg.num_of_packet = i + 1;
                     msg.count_packets = num_packets;
                     msg.sever = severity;
@@ -286,6 +292,9 @@ logger const *client_logger::log(
                     memcpy(packet, &text[startIndex], endIndex - startIndex);
                     packet[endIndex - startIndex] = '\0';
                     strcpy(msg->text, packet);
+                    DWORD pid = GetCurrentProcessId();
+                    std::string pid_str = std::to_string(pid);
+                    strncpy(msg->pid, pid_str.c_str(), 20);
                     strcpy(msg->file_path, "console");
                     // msg->id_process = getpid();
                     msg->num_of_packet = i + 1;
@@ -312,7 +321,9 @@ logger const *client_logger::log(
                     packet[endIndex - startIndex] = '\0'; // Завершаем строку null-символом
                     strcpy(msg->text, packet);
                     strcpy(msg->file_path, logger_stream.first.c_str());
-                    // msg.id_process = getpid();
+                    DWORD pid = GetCurrentProcessId();
+                    std::string pid_str = std::to_string(pid);
+                    strncpy(msg->pid, pid_str.c_str(), 20);
                     msg->num_of_packet = i + 1;
                     msg->count_packets = num_packets;
                     msg->sever = severity;

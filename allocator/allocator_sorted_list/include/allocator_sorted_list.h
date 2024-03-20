@@ -67,7 +67,7 @@ private:
 
     inline allocator *get_allocator() const override;
 
-private:
+public:
 
     std::vector<allocator_test_utils::block_info> get_blocks_info() const noexcept override;
 
@@ -101,7 +101,10 @@ private:
     block_size_t get_occupied_block_size(
         void *block_address) noexcept;
 
-
+private:
+void log_with_guard_my(
+    std::string const &message,
+    logger::severity severity) const;
 
 };
 

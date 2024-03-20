@@ -12,10 +12,7 @@ allocator_sorted_list::~allocator_sorted_list()
 {
     sem_t* sem = get_sem();
     logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->debug("allocator destructor started");
-    }
+    log_with_guard_my("allocator destructor started", logger::severity::debug);
     sem_unlink("/my_semaphore"); 
     sem_close(sem); 
     auto* parent_allocator = get_allocator();
@@ -26,10 +23,6 @@ allocator_sorted_list::~allocator_sorted_list()
     else
     {
         parent_allocator->deallocate(_trusted_memory);
-    }
-    if (log != nullptr)
-    {
-        log->debug("allocator destructor finished");
     }
 }
 
@@ -47,7 +40,7 @@ allocator_sorted_list::allocator_sorted_list(
     {
         if (logger != nullptr)
         {
-            logger->error("Size ofthe requested memory is too small\n");
+            logger->error("Size of the requested memory is too small\n");
         }
         throw std::logic_error("size too small");
     }
@@ -112,19 +105,12 @@ allocator_sorted_list::allocator_sorted_list(
     while (sem_wait(sem) == -1) {
         sleep(1);
     }
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->debug("start allocate memory");
-    }
+    log_with_guard_my("start allocate memory", logger::severity::debug);
     auto requested_size = value_size * values_count;
     if (requested_size < sizeof(block_pointer_t) + sizeof(block_size_t))
     {
         requested_size = sizeof(block_pointer_t) + sizeof(block_size_t);
-        if (log != nullptr)
-        {
-            log->warning("requested space size was changed");
-        }
+        log_with_guard_my("requested size was changed", logger::severity::warning);
     }   
     allocator_with_fit_mode::fit_mode fit_mode = get_fit_mode();
     void *target_block = nullptr;
@@ -155,10 +141,7 @@ allocator_sorted_list::allocator_sorted_list(
     }
     if (target_block == nullptr)
     {
-        if (log != nullptr)
-        {
-            log->error("can't allocate block!");
-        }
+        log_with_guard_my("can't allocate block", logger::severity::error);
         sem_unlink("/my_semaphore");
         sem_post(sem);
         //sem_close(sem);
@@ -170,16 +153,13 @@ allocator_sorted_list::allocator_sorted_list(
         void **ptr_to_next_free_block = reinterpret_cast<void**>(reinterpret_cast<size_t *>(target_block) + 1);
         if (blocks_sizes_difference > 0 && blocks_sizes_difference < sizeof(block_pointer_t) + sizeof(block_size_t))
         {
-            if (log != nullptr)
-            {
-                log->warning("requested size was changed");
-            }
+            
             requested_size = get_aviable_block_size(target_block);
             void *next_free_block = get_aviable_block_next_block_address(target_block);
             void** first_avail_block = reinterpret_cast<void **>
                                 (reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *) + sizeof(size_t) + sizeof(size_t) + sizeof(sem_t*) + sizeof(allocator_with_fit_mode::fit_mode));
             *first_avail_block = next_free_block;
-
+            log_with_guard_my("requested size was changed", logger::severity::warning);
         }
         else
         {//если чтото осталось в таргет блоке после выделения памяти
@@ -207,10 +187,7 @@ allocator_sorted_list::allocator_sorted_list(
         auto blocks_sizes_difference = get_aviable_block_size(target_block) - requested_size;
         if (blocks_sizes_difference > 0 && blocks_sizes_difference < sizeof(block_pointer_t) + sizeof(block_size_t))
         {
-            if (log != nullptr)
-            {
-                log->warning("requested space size was changed");
-            }
+            log_with_guard_my("requested size was changed", logger::severity::warning);
             requested_size = get_aviable_block_size(target_block);
             void** ptr_prev_block_to_this = reinterpret_cast<void**>(reinterpret_cast<size_t*>(previous_to_target_block) + 1); 
             void* ptr_this_next = get_aviable_block_next_block_address(target_block);
@@ -233,19 +210,15 @@ allocator_sorted_list::allocator_sorted_list(
     size_t size_before = *reinterpret_cast<size_t*>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *));
     size_t* size_space = reinterpret_cast<size_t*>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *));
     *size_space = size_before - requested_size - sizeof(size_t) - sizeof(void*);
-    if (log != nullptr)
+    log_with_guard_my("allocate memory. free summ size:" + std::to_string(*size_space), logger::severity::information);
+    std::vector<allocator_test_utils::block_info> data = get_blocks_info();
+    std::string data_str;
+    for (block_info value : data)
     {
-        log->information("allocate memory. free summ size:" + std::to_string(*size_space));
-        log->debug("finish allocate memory");
-        std::vector<allocator_test_utils::block_info> data = get_blocks_info();
-        std::string data_str;
-        for (block_info value : data)
-        {
-            std::string is_oc = value.is_block_occupied ? "YES" : "NO";
-            data_str += (is_oc + "  " + std::to_string(value.block_size) + " | ");
-        }
-        log->debug("state blocks: " + data_str);
+        std::string is_oc = value.is_block_occupied ? "YES" : "NO";
+        data_str += (is_oc + "  " + std::to_string(value.block_size) + " | ");
     }
+    log_with_guard_my("state blocks: " + data_str, logger::severity::debug);
     sem_post(sem);
     return reinterpret_cast<char *>(target_block) + sizeof(size_t) + sizeof(void*); 
 }
@@ -261,33 +234,27 @@ void allocator_sorted_list::deallocate(
     {
         return;
     }
-    logger* log = get_logger();
-    void *target_block = reinterpret_cast<char *>(deallocated_block) - sizeof(void*) - sizeof(size_t); 
+    void *target_block = reinterpret_cast<void*>(reinterpret_cast<char *>(deallocated_block) - sizeof(void*) - sizeof(size_t)); 
     auto size_target_block = *reinterpret_cast<size_t*>(target_block);
-    if (log != nullptr)
+    log_with_guard_my("start deallocate memory", logger::severity::debug);
+    std::string result;
+    auto *size_space = reinterpret_cast<size_t *>(target_block);
+    auto *ptr = reinterpret_cast<void *>(size_space + 1);
+    auto* bytes = reinterpret_cast<unsigned char*>(ptr + 1);
+
+    size_t size_object = get_occupied_block_size(target_block);
+
+    for (int i = 0; i < size_object; i++)
     {
-        log->debug("start deallocate memory");
-        std::string result;
-        auto *size_space = reinterpret_cast<size_t *>(target_block);
-        auto *bytes = reinterpret_cast<unsigned char *>(size_space + 1);
-
-        size_t size_object = get_occupied_block_size(target_block);
-
-        for (int i = 0; i < size_object; i++)
-        {
-            result += std::to_string(static_cast<int>(bytes[i])) + " ";
-        }
-        log->debug("state block:" + result);
+        result += std::to_string(static_cast<int>(bytes[i])) + " ";
     }
+    log_with_guard_my("state block:" + result, logger::severity::debug);
 
     size_t size_before = *reinterpret_cast<size_t*>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *));
-    size_t* size_space = reinterpret_cast<size_t*>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *));
+    size_t* summ_size = reinterpret_cast<size_t*>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *));
     if (*reinterpret_cast<void**>(reinterpret_cast<size_t*>(target_block) + 1) != _trusted_memory)
     {
-        if (log != nullptr)
-        {
-            log->error("can't allocate block!");
-        }
+        log_with_guard_my("block doesn't belong this allocator!", logger::severity::error);
         sem_unlink("/my_semaphore");
         sem_close(sem);
         throw std::logic_error("block doesn't belong this allocator!");
@@ -308,13 +275,13 @@ void allocator_sorted_list::deallocate(
         *ptr_to_first_avail_block = target_block;
         void** ptr_target_block_to_next = reinterpret_cast<void**>(reinterpret_cast<size_t*>(target_block) + 1);
         *ptr_target_block_to_next = current_free_block;
-        *size_space = size_before + get_occupied_block_size(target_block);
-        size_before = *size_space;
+        *summ_size = size_before + get_occupied_block_size(target_block);
+        size_before = *summ_size;
         if (reinterpret_cast<void*>(reinterpret_cast<unsigned char*>(target_block) + size_target_block + sizeof(size_t) + sizeof(void*)) == current_free_block )
         {
             *reinterpret_cast<size_t*>(target_block) = size_target_block + *reinterpret_cast<size_t*>(current_free_block) + sizeof(size_t) + sizeof(void*);
             *reinterpret_cast<void**>(reinterpret_cast<size_t*>(target_block) + 1) = *reinterpret_cast<void**>(reinterpret_cast<size_t*>(current_free_block) + 1);
-            *size_space = size_before + sizeof(size_t) + sizeof(void*);
+            *summ_size = size_before + sizeof(size_t) + sizeof(void*);
         }
     }
     else if (prev_free_block != nullptr && current_free_block != nullptr)
@@ -323,20 +290,20 @@ void allocator_sorted_list::deallocate(
         *ptr_prev_to_next = target_block;
         void** ptr_target_block_to_next = reinterpret_cast<void**>(reinterpret_cast<size_t*>(target_block) + 1);
         *ptr_target_block_to_next = current_free_block;
-        *size_space = size_before + get_occupied_block_size(target_block);
-        size_before = *size_space;
+        *summ_size = size_before + get_occupied_block_size(target_block);
+        size_before = *summ_size;
         if (reinterpret_cast<void*>(reinterpret_cast<unsigned char*>(target_block) + size_target_block + sizeof(size_t) + sizeof(void*)) == current_free_block )
         {
             *reinterpret_cast<size_t*>(target_block) = size_target_block + *reinterpret_cast<size_t*>(current_free_block) + sizeof(size_t) + sizeof(void*);
             *reinterpret_cast<void**>(reinterpret_cast<size_t*>(target_block) + 1) = *reinterpret_cast<void**>(reinterpret_cast<size_t*>(current_free_block) + 1);
-            *size_space = size_before + sizeof(size_t) + sizeof(void*);
+            *summ_size = size_before + sizeof(size_t) + sizeof(void*);
         }
         auto size_prev_block = get_aviable_block_size(prev_free_block);
         if ( reinterpret_cast<void*>(reinterpret_cast<unsigned char*>(prev_free_block) + size_prev_block + sizeof(size_t) + sizeof(void*)) == target_block )
         {
             *reinterpret_cast<size_t*>(prev_free_block) = size_prev_block + size_target_block + sizeof(size_t) + sizeof(void*);
             *reinterpret_cast<void**>(reinterpret_cast<size_t*>(prev_free_block) + 1) = get_aviable_block_next_block_address(target_block);
-            *size_space = size_before + sizeof(size_t) + sizeof(void*);
+            *summ_size = size_before + sizeof(size_t) + sizeof(void*);
         }
     }
     else if (prev_free_block != nullptr && current_free_block == nullptr)
@@ -347,13 +314,13 @@ void allocator_sorted_list::deallocate(
         *ptr_target_block_to_next = nullptr;
 
         auto size_prev_block = get_aviable_block_size(prev_free_block);
-        *size_space = size_before + get_occupied_block_size(target_block);
-        size_before = *size_space;
+        *summ_size = size_before + get_occupied_block_size(target_block);
+        size_before = *summ_size;
         if(reinterpret_cast<void*>(reinterpret_cast<unsigned char*>(prev_free_block) + size_prev_block + sizeof(size_t) + sizeof(void*)) == target_block)
         {
             *reinterpret_cast<size_t*>(prev_free_block) = size_prev_block + size_target_block + sizeof(size_t) + sizeof(void*);
             *reinterpret_cast<void**>(reinterpret_cast<size_t*>(prev_free_block) + 1) = *reinterpret_cast<void**>(reinterpret_cast<size_t*>(target_block) + 1);
-            *size_space = size_before + sizeof(size_t) + sizeof(void*);
+            *summ_size = size_before + sizeof(size_t) + sizeof(void*);
         }
     }
     else
@@ -363,23 +330,17 @@ void allocator_sorted_list::deallocate(
         *ptr_to_first_avail_block = target_block;
         void** ptr_target_block_to_next = reinterpret_cast<void**>(reinterpret_cast<size_t*>(target_block) + 1);
         *ptr_target_block_to_next = nullptr;
-        *size_space = size_before + get_occupied_block_size(target_block);
-    } 
-    if (log != nullptr)
-    {
-        log->information("dellocate memory. free summ size:" + std::to_string(*size_space));
-
-        log->debug("finish deallocate memory");
-        std::vector<allocator_test_utils::block_info> data = get_blocks_info();
-        std::string data_str;
-        for (block_info value : data)
-        {
-            std::string is_oc = value.is_block_occupied ? "YES" : "NO";
-            data_str += (is_oc + "  " + std::to_string(value.block_size) + " | ");
-        }
-        log->debug("state blocks: " + data_str);
-
+        *summ_size = size_before + get_occupied_block_size(target_block);
     }
+    log_with_guard_my("dellocate memory. free summ size:" + std::to_string(*size_space), logger::severity::information);
+    std::vector<allocator_test_utils::block_info> data = get_blocks_info();
+    std::string data_str;
+    for (block_info value : data)
+    {
+        std::string is_oc = value.is_block_occupied ? "YES" : "NO";
+        data_str += (is_oc + "  " + std::to_string(value.block_size) + " | ");
+    }
+    log_with_guard_my("state blocks: " + data_str, logger::severity::debug);
     sem_post(sem);
 }
 
@@ -390,134 +351,62 @@ inline void allocator_sorted_list::set_fit_mode(
     while (sem_wait(sem) == -1) {
         sleep(1);
     }
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->debug("fit mode changing/adding start");
-    }
+    log_with_guard_my("set_fit_mode start", logger::severity::debug);
     *reinterpret_cast<allocator_with_fit_mode::fit_mode *>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *) + sizeof(size_t) + sizeof(size_t)) = mode;
-    if (log != nullptr)
-    {
-        log->debug("fit mode was changed");
-    }
     sem_post(sem);
 }
 
 size_t allocator_sorted_list::get_ancillary_space_size(logger* log) const noexcept
 {
-    if (log != nullptr)
-    {
-        log->trace("get_ancillary_space_size start");
-    }
-    size_t ans = sizeof(logger *) + sizeof(allocator *) + sizeof(size_t) +  sizeof(size_t) + sizeof(allocator_with_fit_mode::fit_mode) + sizeof(void *);
-    if (log != nullptr)
-    {
-        log->trace("get_ancillary_space_size finish");
-    }
-    return ans;
+    if (log != nullptr) log->trace("get_ancillary_space_size start");
+    return sizeof(logger *) + sizeof(allocator *) + sizeof(size_t) +  sizeof(size_t) + sizeof(allocator_with_fit_mode::fit_mode) + sizeof(void *);
+
 }
 
 allocator_with_fit_mode::fit_mode allocator_sorted_list::get_fit_mode() const noexcept
 {
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->trace("get_fit_mode start");
-    }
-    allocator_with_fit_mode::fit_mode ans = *reinterpret_cast<allocator_with_fit_mode::fit_mode *>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *) + sizeof(size_t) + sizeof(size_t));
-    if (log != nullptr)
-    {
-        log->trace("get_fit_mode finish");
-    }
-    return ans;
+    log_with_guard_my("get_fit_mode start", logger::severity::trace);
+    return *reinterpret_cast<allocator_with_fit_mode::fit_mode *>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *) + sizeof(size_t) + sizeof(size_t));
 }
 
 void *allocator_sorted_list::get_first_aviable_block() const noexcept
 {
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->trace("get_first_aviable_block start");
-    }
-    void* ans = *reinterpret_cast<void **>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *) + sizeof(size_t) + sizeof(size_t) + sizeof(allocator_with_fit_mode::fit_mode) + sizeof(sem_t*));
-    if (log != nullptr)
-    {
-        log->trace("get_first_aviable_block finish");
-    }
-    return ans;
+    log_with_guard_my("get_first_aviable_block start", logger::severity::trace);
+    return *reinterpret_cast<void **>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *) + sizeof(size_t) + sizeof(size_t) + sizeof(allocator_with_fit_mode::fit_mode) + sizeof(sem_t*));
 }
 
 allocator::block_size_t allocator_sorted_list::get_aviable_block_size(
     void *block_address) noexcept
 {
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->trace("get_aviable_block_size start");
-    }
-    size_t ans = *reinterpret_cast<size_t *>(block_address);
-    if (log != nullptr)
-    {
-        log->trace("get_aviable_block_size has been gone");
-    }
-    return ans;
+    log_with_guard_my("get_aviable_block_size start", logger::severity::trace);
+    return *reinterpret_cast<size_t *>(block_address);
 }
 
 void *allocator_sorted_list::get_aviable_block_next_block_address(
     void *block_address) noexcept
 {
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->trace("get_aviable_block_next_block_address start");
-    }
-    void* ans =*reinterpret_cast<void**>(reinterpret_cast<size_t *>(block_address) + 1);
-    if (log != nullptr)
-    {
-        log->trace("get_aviable_block_next_block_address has been gone");
-    }
-    return ans;
+    log_with_guard_my("get_aviable_block_next_block_address start", logger::severity::trace);
+    return *reinterpret_cast<void**>(reinterpret_cast<size_t *>(block_address) + 1);
 }
 
 allocator::block_size_t allocator_sorted_list::get_occupied_block_size(
     void *block_address) noexcept
 {
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->trace("get_occupied_block_size start");
-    }
-    size_t ans = *reinterpret_cast<allocator::block_size_t *>(block_address);
-    if (log != nullptr)
-    {
-        log->trace("get_occupied_block_size has been gone");
-    }
-    return ans;
-    
+    log_with_guard_my("get_occupied_block_size start", logger::severity::trace);
+    return *reinterpret_cast<allocator::block_size_t *>(block_address);
 }
 
 inline allocator *allocator_sorted_list::get_allocator() const
 {
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->debug("get allocator start");
-    }
-    allocator* alloc = *reinterpret_cast<allocator**>(_trusted_memory);
-    if (log != nullptr) 
-    {
-        log->debug("allocator has been gone");
-    }
-    return alloc;
+    log_with_guard_my("get_allocator start", logger::severity::debug);
+
+    return *reinterpret_cast<allocator**>(_trusted_memory);
 }
 
 std::vector<allocator_test_utils::block_info> allocator_sorted_list::get_blocks_info() const noexcept
 {
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->debug("blocks info start");
-    }
+    log_with_guard_my("get_blocks_info start", logger::severity::debug);
+
     std::vector<allocator_test_utils::block_info> data;
     void** ans = reinterpret_cast<void **>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *) + sizeof(size_t) + sizeof(size_t) + sizeof(sem_t*) + sizeof(allocator_with_fit_mode::fit_mode));
     void* cur_block = reinterpret_cast<void **>(ans + 1);
@@ -532,13 +421,8 @@ std::vector<allocator_test_utils::block_info> allocator_sorted_list::get_blocks_
         void* ptr_next_or_memory =*reinterpret_cast<void**>(reinterpret_cast<size_t *>(cur_block) + 1);
         value.is_block_occupied = (ptr_next_or_memory == _trusted_memory) ? true : false;
         data.push_back(value);
-        cur_block = reinterpret_cast<unsigned char *>(cur_block) + sizeof(size_t) + sizeof(void*) + value.block_size;
+        cur_block = reinterpret_cast<void*>(reinterpret_cast<unsigned char *>(cur_block) + sizeof(size_t) + sizeof(void*) + value.block_size);
         current_size = current_size + sizeof(size_t) + sizeof(void* ) + value.block_size;
-    }
-
-    if (log != nullptr)
-    {
-        log->debug("block info has been gathered");
     }
     
     return data;
@@ -552,31 +436,25 @@ inline logger *allocator_sorted_list::get_logger() const
 
 sem_t *allocator_sorted_list::get_sem() const noexcept
 {
-    logger* log = get_logger();
-    if (log != nullptr)
-    {
-        log->trace("get_sem start");
-    }
-    sem_t* ans = *reinterpret_cast<sem_t **>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *) + sizeof(size_t)
+    log_with_guard_my("get_sem start", logger::severity::trace);
+    return *reinterpret_cast<sem_t **>(reinterpret_cast<unsigned char *>(_trusted_memory) + sizeof(allocator *) + sizeof(logger *) + sizeof(size_t)
                              + sizeof(size_t) + sizeof(allocator_with_fit_mode::fit_mode));;
-    if (log != nullptr)
-    {
-        log->trace("get_sem finish");
-    }
-    return ans;
 }
 
 
 inline std::string allocator_sorted_list::get_typename() const noexcept
 {
-    logger* log = get_logger();
-    if (log != nullptr)
+    log_with_guard_my("typename start", logger::severity::debug);
+    //
+}
+
+void allocator_sorted_list::log_with_guard_my(
+    std::string const &message,
+    logger::severity severity) const
+{
+    logger *got_logger = get_logger(); 
+    if (got_logger != nullptr)
     {
-        log->debug("typename start");
-    }
-    //here
-    if (log != nullptr)
-    {
-        log->debug("typename has been gone");
+        got_logger->log(message, severity);
     }
 }

@@ -30,10 +30,10 @@ public:
         allocator_global_heap const &other) = delete;
 
     allocator_global_heap(
-        allocator_global_heap &&other) noexcept;
+        allocator_global_heap &&other) noexcept = delete;
 
     allocator_global_heap &operator=(
-        allocator_global_heap &&other) noexcept;
+        allocator_global_heap &&other) noexcept = delete;
 
 public:
 
@@ -56,10 +56,10 @@ private:
 
     inline std::string get_typename() const noexcept override;
 
-public:
-
-
-
+private:
+void log_with_guard_my(
+    std::string const &message,
+    logger::severity severity);
 };
 
 #endif //MATH_PRACTICE_AND_OPERATING_SYSTEMS_ALLOCATOR_ALLOCATOR_GLOBAL_HEAP_H

@@ -1,0 +1,2 @@
+C:\TDM-GCC-64\bin\ar.exe qc libmp_os_allctr_allctr_glbl_hp.a CMakeFiles/mp_os_allctr_allctr_glbl_hp.dir/src/allocator_global_heap.cpp.obj
+C:\TDM-GCC-64\bin\ranlib.exe libmp_os_allctr_allctr_glbl_hp.a

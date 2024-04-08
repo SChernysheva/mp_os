@@ -227,7 +227,6 @@ logger/client_logger/CMakeFiles/mp_os_lggr_clnt_lggr.dir/src/client_logger.cpp.o
   /usr/include/linux/types.h \
   /usr/include/locale.h \
   /usr/include/math.h \
-  /usr/include/mqueue.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
@@ -270,7 +269,6 @@ logger/client_logger/CMakeFiles/mp_os_lggr_clnt_lggr.dir/src/client_logger.cpp.o
   /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
   /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
   /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
-  /usr/include/x86_64-linux-gnu/bits/mqueue.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
@@ -300,14 +298,12 @@ logger/client_logger/CMakeFiles/mp_os_lggr_clnt_lggr.dir/src/client_logger.cpp.o
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
-  /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
@@ -806,8 +802,6 @@ logger/client_logger/CMakeFiles/mp_os_lggr_clnt_lggr.dir/src/client_logger_build
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
-/usr/include/x86_64-linux-gnu/bits/mqueue.h:
-
 /usr/include/c++/9/bits/std_function.h:
 
 /usr/include/c++/9/bits/sstream.tcc:
@@ -875,8 +869,6 @@ logger/client_logger/CMakeFiles/mp_os_lggr_clnt_lggr.dir/src/client_logger_build
 /usr/include/c++/9/bits/vector.tcc:
 
 /usr/include/c++/9/cmath:
-
-/usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h:
 
 /usr/include/c++/9/bits/stl_construct.h:
 
@@ -1023,8 +1015,6 @@ logger/client_logger/CMakeFiles/mp_os_lggr_clnt_lggr.dir/src/client_logger_build
 /usr/include/c++/9/utility:
 
 /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/parser.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
 
 /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/void_t.hpp:
 
@@ -1337,8 +1327,6 @@ logger/client_logger/CMakeFiles/mp_os_lggr_clnt_lggr.dir/src/client_logger_build
 /usr/include/linux/stddef.h:
 
 /usr/include/linux/types.h:
-
-/usr/include/mqueue.h:
 
 /usr/include/pthread.h:
 

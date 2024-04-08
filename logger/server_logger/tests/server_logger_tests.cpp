@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
-#include "server_logger.h"
+//#include <gtest/gtest.h>
+#include "../include/server_logger.h"
 
 
 int main(
@@ -7,7 +7,6 @@ int main(
     char *argv[])
 {
     server_logger* server = new server_logger();
-    server->init();
     // testing::InitGoogleTest(&argc, argv);
 
     // return RUN_ALL_TESTS();

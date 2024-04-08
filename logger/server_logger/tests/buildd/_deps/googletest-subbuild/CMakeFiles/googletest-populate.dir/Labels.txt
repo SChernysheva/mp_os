@@ -1,0 +1,14 @@
+# Target labels
+ googletest-populate
+# Source files and their labels
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/CMakeFiles/googletest-populate
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/CMakeFiles/googletest-populate.rule
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/CMakeFiles/googletest-populate-complete.rule
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-build.rule
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-configure.rule
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-download.rule
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-install.rule
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-mkdir.rule
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-patch.rule
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-test.rule
+C:/labs/laba5/mp_os/logger/server_logger/tests/buildd/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-update.rule

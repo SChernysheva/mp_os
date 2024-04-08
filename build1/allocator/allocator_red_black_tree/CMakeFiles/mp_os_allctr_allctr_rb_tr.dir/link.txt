@@ -1,0 +1,2 @@
+C:\TDM-GCC-64\bin\ar.exe qc libmp_os_allctr_allctr_rb_tr.a CMakeFiles/mp_os_allctr_allctr_rb_tr.dir/src/allocator_red_black_tree.cpp.obj
+C:\TDM-GCC-64\bin\ranlib.exe libmp_os_allctr_allctr_rb_tr.a

@@ -8,15 +8,10 @@ FetchContent_MakeAvailable(json)
 # Добавляем библиотеку rt
 find_library(RT_LIBRARY rt)
 
-# Проверяем, была ли найдена библиотека rt
-if(RT_LIBRARY)
-    message(STATUS "Found librt: ${RT_LIBRARY}")
-else()
-    message(FATAL_ERROR "librt not found")
-endif()
 
 # Линковка с библиотекой rt
 target_link_libraries(mp_os_lggr_lggr PRIVATE ${RT_LIBRARY})
+##target_link_libraries(mp_os_lggr_lggr)
 add_library(
         mp_os_lggr_srvr_lggr
         src/server_logger.cpp

@@ -1,0 +1,2 @@
+C:\TDM-GCC-64\bin\ar.exe qc ..\..\..\lib\libgtest_main.a CMakeFiles/gtest_main.dir/src/gtest_main.cc.obj
+C:\TDM-GCC-64\bin\ranlib.exe ..\..\..\lib\libgtest_main.a

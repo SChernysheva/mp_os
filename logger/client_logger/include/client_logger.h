@@ -20,7 +20,7 @@ class client_logger final:
 public:
 
     client_logger(
-        std::map<std::string, std::vector<logger::severity>> const & );
+        std::map<std::string, std::vector<logger::severity>> const & , std::string const& opt);
 
     client_logger(
         client_logger const &other) = delete;
@@ -49,7 +49,8 @@ private:
 
     static std::map<logger::severity, std::string> severity_to_str;
 
-     
+private:
+    std::string opt;
 
 public:
 

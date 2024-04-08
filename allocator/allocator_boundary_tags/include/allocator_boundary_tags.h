@@ -6,6 +6,10 @@
 #include <allocator_with_fit_mode.h>
 #include <logger_guardant.h>
 #include <typename_holder.h>
+#include <semaphore.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 
 class allocator_boundary_tags final:
     private allocator_guardant,
@@ -24,10 +28,10 @@ public:
     ~allocator_boundary_tags() override;
 
     allocator_boundary_tags(
-        allocator_boundary_tags const &other);
+        allocator_boundary_tags const &other) = delete;
 
     allocator_boundary_tags &operator=(
-        allocator_boundary_tags const &other);
+        allocator_boundary_tags const &other) = delete;
 
     allocator_boundary_tags(
         allocator_boundary_tags &&other) noexcept;
@@ -72,6 +76,25 @@ private:
 private:
 
     inline std::string get_typename() const noexcept override;
+
+private:
+    void log_with_guard_my(
+    std::string const &message,
+    logger::severity severity) const;
+
+    size_t get_ancillary_size() const;
+
+    size_t get_meta_size() const;
+
+    sem_t* get_sem();
+
+    void* get_first_occupied_block() const;
+
+    allocator_with_fit_mode::fit_mode get_fit_mode();
+
+    size_t get_full_size() const;
+
+    void* get_next_occupied_block(void* address) const;
 
 };
 

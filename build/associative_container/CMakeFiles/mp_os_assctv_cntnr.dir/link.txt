@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmp_os_assctv_cntnr.a 
+/usr/bin/ranlib libmp_os_assctv_cntnr.a

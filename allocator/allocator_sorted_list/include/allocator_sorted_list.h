@@ -6,6 +6,11 @@
 #include <allocator_with_fit_mode.h>
 #include <logger_guardant.h>
 #include <typename_holder.h>
+#include <iostream>
+#include <semaphore.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 
 class allocator_sorted_list final:
     private allocator_guardant,
@@ -15,7 +20,6 @@ class allocator_sorted_list final:
     private typename_holder
 {
 //список свободных блоков(в каждом хранится инфа о размере блока и о ардесе след блока)
-//начало - аллокатор(откуда взяты) - логгер - размер всей памяти - указатель на первый свободный
 private:
 
     void *_trusted_memory;
@@ -25,16 +29,16 @@ public:
     ~allocator_sorted_list() override;
 
     allocator_sorted_list(
-        allocator_sorted_list const &other);
+        allocator_sorted_list const &other) = delete;
 
     allocator_sorted_list &operator=(
-        allocator_sorted_list const &other);
+        allocator_sorted_list const &other) = delete;
 
     allocator_sorted_list(
-        allocator_sorted_list &&other) noexcept;
+        allocator_sorted_list &&other) noexcept = delete;
 
     allocator_sorted_list &operator=(
-        allocator_sorted_list &&other) noexcept;
+        allocator_sorted_list &&other) noexcept = delete;
 
 public:
 
@@ -43,6 +47,7 @@ public:
         allocator *parent_allocator = nullptr,
         logger *logger = nullptr,
         allocator_with_fit_mode::fit_mode allocate_fit_mode = allocator_with_fit_mode::fit_mode::first_fit);
+
 
 public:
 
@@ -76,7 +81,31 @@ private:
 
 
 private:
-    size_t get_ancillary_space_size() const noexcept;
+
+    size_t get_ancillary_space_size(logger* log) const noexcept;
+
+    allocator_with_fit_mode::fit_mode get_fit_mode() const noexcept;
+
+    void *get_first_aviable_block() const noexcept;
+
+    sem_t *get_sem() const noexcept;
+
+private:
+
+    block_size_t get_aviable_block_size(
+        void *block_address) noexcept;
+
+    void *get_aviable_block_next_block_address(
+        void *block_address) noexcept;
+
+    block_size_t get_occupied_block_size(
+        void *block_address) noexcept;
+
+private:
+void log_with_guard_my(
+    std::string const &message,
+    logger::severity severity) const;
+
 };
 
 #endif //MATH_PRACTICE_AND_OPERATING_SYSTEMS_ALLOCATOR_ALLOCATOR_SORTED_LIST_H

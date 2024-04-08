@@ -1,0 +1,2 @@
+C:\TDM-GCC-64\bin\ar.exe qc ..\..\..\lib\libgmock.a "CMakeFiles/gmock.dir/src/gmock-all.cc.obj"
+C:\TDM-GCC-64\bin\ranlib.exe ..\..\..\lib\libgmock.a

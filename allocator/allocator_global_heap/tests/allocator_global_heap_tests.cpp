@@ -11,6 +11,7 @@ TEST(positive_tests, test1)
 
     logger *logger_instance = logger_builder_instance
         ->add_file_stream("gh_alc_test1_logs.txt", logger::severity::debug)
+        ->add_console_stream(logger::severity::debug)
         ->build();
     delete logger_builder_instance;
 

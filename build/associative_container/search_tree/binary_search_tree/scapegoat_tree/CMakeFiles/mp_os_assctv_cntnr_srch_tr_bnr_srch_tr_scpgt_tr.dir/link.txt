@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmp_os_assctv_cntnr_srch_tr_bnr_srch_tr_scpgt_tr.a 
+/usr/bin/ranlib libmp_os_assctv_cntnr_srch_tr_bnr_srch_tr_scpgt_tr.a

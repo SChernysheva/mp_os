@@ -5,52 +5,36 @@
 #include <cstring>
 #include <fcntl.h>
 #include <sys/stat.h>
-#include <mqueue.h>
 #include <fstream>
 #include "../include/server_logger.h"
+
+
 #define NAME "/QUEUE"
+#define PACKET_SIZE 10
 
-server_logger::server_logger(
-    server_logger const &other)
-{
-    throw not_implemented("server_logger::server_logger(server_logger const &other)", "your code should be here...");
-}
-server_logger::server_logger(){}
-server_logger &server_logger::operator=(
-    server_logger const &other)
-{
-    throw not_implemented("server_logger &server_logger::operator=(server_logger const &other)", "your code should be here...");
-}
+server_logger::server_logger(){
+    this->init();
+};
 
-server_logger::server_logger(
-    server_logger &&other) noexcept
-{
-    throw not_implemented("server_logger::server_logger(server_logger &&other) noexcept", "your code should be here...");
-}
-
-server_logger &server_logger::operator=(
-    server_logger &&other) noexcept
-{
-    throw not_implemented("server_logger &server_logger::operator=(server_logger &&other) noexcept", "your code should be here...");
-}
 
 server_logger::~server_logger() noexcept
 {
-    throw not_implemented("server_logger::~server_logger() noexcept", "your code should be here...");
 }
 
 
 struct my_message
 {
-    //pid_t id_process;
     int count_packets;
     int num_of_packet;
     char text[100];
     char file_path[50];
     logger::severity sever;
     int id_;
+    char pid[20];
 };
 
+#ifdef __linux__
+#include <mqueue.h>
 void server_logger::init(void)
 {
     struct mq_attr attr;
@@ -67,7 +51,7 @@ void server_logger::init(void)
         exit(1);
     }
     while(true) {
-        // Получение сообщения из очереди
+        // get message
         my_message received_msg;
         if (mq_receive(mq, (char*)&received_msg, attr.mq_msgsize, NULL) == -1) {
             perror("mq_receive");
@@ -75,81 +59,75 @@ void server_logger::init(void)
             mq_unlink(NAME);
             exit(1);
         } else {
-
             if (received_msg.count_packets == received_msg.num_of_packet)
             {
                 std::string current_dt = logger::current_datetime_to_string();
-                if (received_msg.count_packets == 1)
+                if (received_msg.count_packets == 1) //if there is only 1 packet for this text/file
                 {
                     if (strcmp(received_msg.file_path, "console") == 0)
                     {
-                        std::cout << "[" << severity_to_string(received_msg.sever) << "]" << "[" << current_dt << "] " << received_msg.text << std::endl;
+                        std::cout << "[" << current_dt << "]" << "[" << severity_to_string(received_msg.sever) << "] " << received_msg.text << std::endl;
                     }
                     else 
                     {
                         std::fstream str(received_msg.file_path, std::ios::in | std::ios::out | std::ios::app);
-                        if (!str.is_open()) {}
-                        str << "[" << severity_to_string(received_msg.sever) << "]" << "[" << current_dt << "] " << received_msg.text << std::endl;
+                        if (str.is_open()) str << "[" << current_dt << "]" << "[" << severity_to_string(received_msg.sever) << "] " << received_msg.text << std::endl;
+                        else throw std::logic_error("can't open file");
                     }
                 }
                 else
                 {
-                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg.id_) + ".txt";
+                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg.id_) + ".txt"; // (if last packet) find a file for cash info from packets
                     std::fstream file(file_path_cash, std::ios::in | std::ios::out | std::ios::app);
                     if (file.is_open())
                     {
-                        file << received_msg.text;
+                        file << received_msg.text; //write info in file
                     }
-                    file.seekg(std::ios::beg);
+                    else throw std::logic_error("can't open file");
+                    file.seekg(std::ios::beg); //back to the start
                     if (strcmp(received_msg.file_path, "console") == 0)
                     {
-                        std::cout << "[" << severity_to_string(received_msg.sever) << "]"
-                                  << "[" << current_dt << "] ";
+                        std::cout << "[" << current_dt << "]" << "[" << severity_to_string(received_msg.sever) << "] ";
                         std::string line;
-                        while (std::getline(file, line))
+                        while (std::getline(file, line)) // get info from cash file and write it
                         {
                             std::cout << line << std::endl;
                         }
+
                         file.close();
-                        std::remove(file_path_cash.c_str());
+                        std::remove(file_path_cash.c_str()); // remove cash file
+    
                     }
                     else
                     {
-                        std::fstream str(received_msg.file_path, std::ios::in | std::ios::out | std::ios::app);
-                        if (!str.is_open())
-                        {}
-                        str << "[" << severity_to_string(received_msg.sever) << "]"
-                             << "[" << current_dt << "] ";
+                        std::fstream str(received_msg.file_path, std::ios::in | std::ios::out | std::ios::app); //in file from file
+                        if(!str.is_open()) throw std::logic_error("can't open file");
+                        str << "[" << current_dt << "]" << "[" << severity_to_string(received_msg.sever) << "] ";
                         std::string line;
-                        while (std::getline(file, line))
+                        while (std::getline(file, line)) // get info from cash file and write it
                         {
-                            str << line << std::endl;
+                             str << line << std::endl;
                         }
+                            std::remove(file_path_cash.c_str()); // remove cash file
                         file.close();
-                        std::remove(file_path_cash.c_str());
                     }
                 }
             }
             else
             {
-                if (received_msg.num_of_packet == 1)
+                if (received_msg.num_of_packet == 1) //if there is first packet and count_packets > 1
                 {
-                    //создать файл записать текст тцуда
+                    //make a new cash file and write
                     std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg.id_) + ".txt";
-                    std::ofstream file(file_path_cash);
-                    if (file.is_open())
-                    {
-                        file << received_msg.text;
-                    }
+                    std::fstream file(file_path_cash, std::ios::in | std::ios::out | std::ios::app);
+                    if (file.is_open()) file << received_msg.text;
+                    
                 }
                 else
                 {
                     std::string file_path_cash =  "file_path_cash_id" + std::to_string(received_msg.id_) + ".txt";
                     std::ofstream file(file_path_cash, std::ios::app);
-                    if (file.is_open())
-                    {
-                        file << received_msg.text;
-                    }
+                    if (file.is_open()) file << received_msg.text;
                 }
             }
             // Обработка полученного сообщения
@@ -159,8 +137,120 @@ void server_logger::init(void)
     mq_unlink(NAME);
 }
 
+
+#elif _WIN32
+#include <windows.h>
+void server_logger::init(void)
+{
+    HANDLE hMapFile = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, sizeof(my_message), "SharedMemory");
+    LPVOID pData = MapViewOfFile(hMapFile, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(my_message));
+    HANDLE hSemaphore = CreateSemaphore(NULL, 1, 1, "Semaphore");
+
+    if (hMapFile && pData && hSemaphore)
+    {
+        while (true)
+        {
+            WaitForSingleObject(hSemaphore, INFINITE);
+            my_message *received_msg = (my_message *)pData;
+            if (received_msg->num_of_packet < 1) 
+            {
+                ReleaseSemaphore(hSemaphore, 1, NULL);   
+                continue;
+            }
+            if (received_msg->count_packets == received_msg->num_of_packet)
+            {
+                std::string current_dt = logger::current_datetime_to_string();
+                if (received_msg->count_packets == 1) // if there is only 1 packet for this text/file
+                {
+                    if (strcmp(received_msg->file_path, "console") == 0)
+                    {
+                        std::cout << "[" << current_dt << "]"
+                                  << "[" << severity_to_string(received_msg->sever) << "] " << received_msg->text << std::endl;
+                    }
+                    else
+                    {
+                        std::fstream str(received_msg->file_path, std::ios::in | std::ios::out | std::ios::app);
+                        if (str.is_open())
+                        {
+                            str << "[" << current_dt << "]" << "[" << severity_to_string(received_msg->sever) << "] " << received_msg->text << std::endl;
+                        }
+                    }
+                }
+                else
+                {
+                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg->id_) + received_msg->pid + ".txt"; // (if last packet) find a file for cash info from packets
+                    std::fstream file(file_path_cash, std::ios::in | std::ios::out | std::ios::app);
+                    if (file.is_open())
+                    {
+                        file << received_msg->text; // write info in file
+                    }
+                    file.seekg(std::ios::beg); // back to the start
+                    if (strcmp(received_msg->file_path, "console") == 0)
+                    {
+                        std::cout << "[" << current_dt << "]"
+                                  << "[" << severity_to_string(received_msg->sever) << "] ";
+                        std::string line;
+                        while (std::getline(file, line)) // get info from cash file and write it
+                        {
+                            std::cout << line << std::endl;
+                        }
+                        file.close();
+                        std::remove(file_path_cash.c_str()); // remove cash file
+                    }
+                    else
+                    {
+                        std::fstream str(received_msg->file_path, std::ios::in | std::ios::out | std::ios::app); // in file from file
+                        if (str.is_open())
+                        {
+                            str << "[" << current_dt << "]"
+                                << "[" << severity_to_string(received_msg->sever) << "] ";
+                            std::string line;
+                            while (std::getline(file, line)) // get info from cash file and write it
+                            {
+                                str << line << std::endl;
+                            }
+                        }
+                        file.close();
+                        std::remove(file_path_cash.c_str()); // remove cash file
+                    }
+                   }   
+            }
+            else
+            {
+                if (received_msg->num_of_packet == 1) // if there is first packet and count_packets > 1
+                {
+                    // make a new cash file and write
+                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg->id_) + received_msg->pid + ".txt";
+                    std::fstream file(file_path_cash, std::ios::in | std::ios::out | std::ios::app);
+                    if (file.is_open())
+                    {
+                        file << received_msg->text;
+                    }
+                }
+                else
+                {
+                    std::string file_path_cash = "file_path_cash_id" + std::to_string(received_msg->id_) + received_msg->pid + ".txt";
+                    std::ofstream file(file_path_cash, std::ios::app);
+                    if (file.is_open())
+                    {
+                        file << received_msg->text;
+                    }
+                }
+            }
+            // Обработка полученного сообщения
+            ReleaseSemaphore(hSemaphore, 1, NULL);
+        }
+
+        UnmapViewOfFile(pData);
+        CloseHandle(hMapFile);
+        CloseHandle(hSemaphore);
+    }
+}
+
+#endif
 logger const *server_logger::log(
     const std::string &text,
     logger::severity severity) const noexcept
 {
+    std:: cout << "server_log" << std::endl;
 }

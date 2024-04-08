@@ -1,0 +1,3 @@
+C:/labs/laba5/mp_os/build1/_deps/json-subbuild/CMakeFiles/json-populate.dir
+C:/labs/laba5/mp_os/build1/_deps/json-subbuild/CMakeFiles/edit_cache.dir
+C:/labs/laba5/mp_os/build1/_deps/json-subbuild/CMakeFiles/rebuild_cache.dir

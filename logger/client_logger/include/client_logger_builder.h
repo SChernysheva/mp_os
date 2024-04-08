@@ -14,10 +14,13 @@ class client_logger_builder final:
 
 private:
     std::map<std::string, std::vector<logger::severity>> data;
+    std::string opt;
 
 public:
    
    client_logger_builder();
+
+   logger_builder* set_options(std::string opt) override;
 
     client_logger_builder(
         client_logger_builder const &other) = delete;

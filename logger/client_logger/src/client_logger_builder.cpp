@@ -2,8 +2,10 @@
 
 #include "../include/client_logger_builder.h"
 
-client_logger_builder::client_logger_builder()
-{}
+client_logger_builder::client_logger_builder() 
+{
+    this->opt = "%d %t %s %m";
+}
 
 client_logger_builder::~client_logger_builder() noexcept
 {}
@@ -48,5 +50,11 @@ logger_builder *client_logger_builder::clear()
 
 logger *client_logger_builder::build() const
 {
-    return new client_logger(data);
+    return new client_logger(data, this->opt);
+}
+
+logger_builder* client_logger_builder::set_options(std::string opt)
+{
+    this->opt = opt;
+    return this;
 }

@@ -1,0 +1,1 @@
+-IC:/labs/laba5/mp_os/logger/server_logger/./include -IC:/labs/laba5/mp_os/common/./include -IC:/labs/laba5/mp_os/logger/logger/./include -I"C:/labs/laba5/mp_os/build1/_deps/json-src/include"

@@ -511,6 +511,114 @@ mp_os_allctr_allctr_srtd_lst_tests_IS_TOP_LEVEL:STATIC=OFF
 mp_os_allctr_allctr_srtd_lst_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/allocator/allocator_sorted_list/tests
 
 //Value Computed by CMake
+mp_os_assctv_cntnr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_AVL_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/AVL_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_AVL_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_AVL_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/AVL_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_AVL_tr_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/AVL_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_AVL_tr_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_AVL_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/AVL_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_rb_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/red_black_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_rb_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_rb_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/red_black_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_rb_tr_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/red_black_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_rb_tr_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_rb_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/red_black_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_scpgt_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/scapegoat_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_scpgt_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_scpgt_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/scapegoat_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_scpgt_tr_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/scapegoat_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_scpgt_tr_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_scpgt_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/scapegoat_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_spl_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/splay_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_spl_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_spl_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/splay_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_spl_tr_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/splay_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_spl_tr_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_spl_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/splay_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/tests
+
+//Value Computed by CMake
 mp_os_cmmn_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/common
 
 //Value Computed by CMake
@@ -734,7 +842,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=24
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=36
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

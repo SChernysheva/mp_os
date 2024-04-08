@@ -13,6 +13,7 @@ public:
     virtual ~logger_builder() noexcept = default;
 
 public:
+    virtual logger_builder* set_options(std::string opt) = 0;
 
     virtual logger_builder *add_file_stream(
         std::string const &stream_file_path,

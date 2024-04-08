@@ -1,3 +1,4 @@
+
 #include <gtest/gtest.h>
 #include <logger.h>
 #include <logger_builder.h>
@@ -32,8 +33,13 @@ logger *create_logger(
 
 TEST(positive_tests, test1) {
     //TODO: logger
+    logger *logger = create_logger(std::vector<std::pair<std::string, logger::severity>>
+                                           {
+                                                   {"allocator_sorted_list_tests_logs_negative_test_2.txt",
+                                                    logger::severity::debug}
+                                           });
 
-    allocator *alloc = new allocator_sorted_list(3000, nullptr, nullptr, allocator_with_fit_mode::fit_mode::first_fit);
+    allocator *alloc = new allocator_sorted_list(3000, nullptr, logger, allocator_with_fit_mode::fit_mode::first_fit);
 
 
     auto first_block = reinterpret_cast<int *>(alloc->allocate(sizeof(int), 250));
@@ -169,7 +175,13 @@ TEST(positive_tests, test4) {
 
 
 TEST(positive_tests, test5) {
-    allocator *alloc = new allocator_sorted_list(3000, nullptr, nullptr, allocator_with_fit_mode::fit_mode::first_fit);
+
+        logger *logger = create_logger(std::vector<std::pair<std::string, logger::severity>>
+                                           {
+                                                   {"allocator_sorted_list_tests_logs_negative_test_2.txt",
+                                                    logger::severity::debug}
+                                           });
+    allocator *alloc = new allocator_sorted_list(3000, nullptr, logger, allocator_with_fit_mode::fit_mode::first_fit);
 
 
     auto first_block = reinterpret_cast<int *>(alloc->allocate(sizeof(int), 250));

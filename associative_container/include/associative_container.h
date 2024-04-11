@@ -20,7 +20,7 @@ public:
         
         tkey key;
         tvalue value;
-        
+        key_value_pair(const tkey& k, const tvalue& v) : key(k), value(v) {}
     };
     
     struct key_value_ptr_pair

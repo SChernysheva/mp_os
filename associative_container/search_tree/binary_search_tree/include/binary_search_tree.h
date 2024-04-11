@@ -19,6 +19,7 @@ class binary_search_tree:
     public search_tree<tkey, tvalue>
 {
 
+    friend class template_method_basics;
 protected:
     
     struct node
@@ -61,11 +62,11 @@ public:
     class infix_iterator;
     class infix_const_iterator;
     class infix_reverse_iterator;
-    class infix_reverse_const_iterator;
+    class infix_const_reverse_iterator;
     class postfix_iterator;
     class postfix_const_iterator;
     class postfix_reverse_iterator;
-    class postfix_reverse_const_iterator;
+    class postfix_const_reverse_iterator;
 
     struct iterator_data
     {
@@ -77,11 +78,11 @@ public:
         friend class infix_iterator;
         friend class infix_const_iterator;
         friend class infix_reverse_iterator;
-        friend class infix_reverse_const_iterator;
+        friend class infix_const_reverse_iterator;
         friend class postfix_iterator;
         friend class postfix_const_iterator;
         friend class postfix_reverse_iterator;
-        friend class postfix_reverse_const_iterator;
+        friend class postfix_const_reverse_iterator;
 
     public:
         
@@ -101,12 +102,20 @@ public:
 
         inline tkey const &get_key() const noexcept
         {
-            if (is_state_initialized) return *_key;
+            if (is_state_initialized()) return *_key;
+            else
+            {
+                throw std::logic_error("can't get key");
+            }
         }
 
         inline tvalue const &get_value() const noexcept
         {
-            if (is_state_initialized) return *_value;
+            if (is_state_initialized()) return *_value;
+            else
+            {
+                throw std::logic_error("can't get key");
+            }
         }
 
         inline bool is_state_initialized() const noexcept
@@ -140,7 +149,7 @@ public:
     public:
 
         iterator_data(
-            iterator_data const &other) : iterator_data(other.depth, other._key, other._value)
+            iterator_data const &other) : iterator_data(other.depth, other.get_key(), other.get_value())
         {
         }
 
@@ -167,8 +176,10 @@ public:
         }
 
         iterator_data(
-            iterator_data &&other) noexcept : iterator_data(std::move(other.depth), std::move(other._key), std::move(other._value))
+            iterator_data &&other) noexcept : iterator_data(other.depth, other.get_key(), other.get_value())
         {
+            allocator::destruct(other._key);
+            allocator::destruct(other._value);
             other._is_state_initialized = false;
             _is_state_initialized = true;
         }
@@ -236,17 +247,18 @@ public:
         explicit prefix_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data):  _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)),
+                                   _data(data)
+        {
+            _state.push(subtree_root);
+
+            if (_state.empty())
             {
-                _state.push(subtree_root);
-
-                if (_state.empty())
-                {
-                    return;
-                }
-
-                allocator::construct(_data->_key, _state.top()->key);
-                allocator::construct(_data->_value, _state.top()->value);
+                return;
+            }
+            allocator::construct(_data->_key, _state.top()->key);
+            allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
             }
 
         explicit prefix_iterator(
@@ -396,9 +408,9 @@ public:
     
     private:
 
-        const iterator_data *_data;
-        std::stack<const node *> _state;
-        const binary_search_tree<tkey, tvalue> *_holder;
+        iterator_data *_data;
+        std::stack<node *> _state;
+        binary_search_tree<tkey, tvalue> *_holder;
     
     public:
         explicit prefix_const_iterator(
@@ -411,7 +423,7 @@ public:
         explicit prefix_const_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data) : _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)), _data(data)
             {
                 _state.push(subtree_root);
 
@@ -422,6 +434,7 @@ public:
 
                 allocator::construct(_data->_key, _state.top()->key);
                 allocator::construct(_data->_value, _state.top()->value);
+                _data->_is_state_initialized = true;
             }
 
         explicit prefix_const_iterator(
@@ -584,23 +597,31 @@ public:
         explicit prefix_reverse_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data): _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)), _data(data)
         {
-            _state.push(subtree_root);
-            node* current = subtree_root->right_subtree;
-            while (current != nullptr)
+            while (subtree_root != nullptr)
             {
-                _state.push(current);
-                current = current->right_subtree;
+                _state.push(subtree_root);
+                subtree_root = subtree_root->right_subtree;
             }
-
             if (_state.empty())
             {
                 return;
             }
-
+            while(_state.top()->right_subtree != nullptr || _state.top()->left_subtree != nullptr)
+            {
+                if (_state.top()->left_subtree != nullptr)
+                {
+                    _state.push(_state.top()->left_subtree);
+                    while (_state.top()->right_subtree != nullptr)
+                    {
+                        _state.push(_state.top()->right_subtree);
+                    }
+                }
+            }
             allocator::construct(_data->_key, _state.top()->key);
             allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
         }
 
         explicit prefix_reverse_iterator(
@@ -765,12 +786,10 @@ public:
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
             iterator_data *data)
         {
-            _state.push(subtree_root);
-            node* current = subtree_root->right_subtree;
-            while (current != nullptr)
+            while (subtree_root != nullptr)
             {
-                _state.push(current);
-                current = current->right_subtree;
+                _state.push(subtree_root);
+                subtree_root = subtree_root->right_subtree;
             }
 
             if (_state.empty())
@@ -778,8 +797,21 @@ public:
                 return;
             }
 
+            while(_state.top()->right_subtree != nullptr || _state.top()->left_subtree != nullptr)
+            {
+                if (_state.top()->left_subtree != nullptr)
+                {
+                    _state.push(_state.top()->left_subtree);
+                    while (_state.top()->right_subtree != nullptr)
+                    {
+                        _state.push(_state.top()->right_subtree);
+                    }
+                }
+            }
+
             allocator::construct(_data->_key, _state.top()->key);
             allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
         }
 
         explicit prefix_const_reverse_iterator(
@@ -943,22 +975,23 @@ public:
         explicit infix_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data):  _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)),
+                                   _data(data)
+        {
+            while (subtree_root != nullptr)
             {
-                while (subtree_root != nullptr)
-                {
-                    _state.push(subtree_root);
-                    subtree_root = subtree_root->left_subtree;
-                }
-
-                if (_state.empty())
-                {
-                    return;
-                }
-
-                allocator::construct(_data->_key, _state.top()->key);
-                allocator::construct(_data->_value, _state.top()->value);
+                _state.push(subtree_root);
+                subtree_root = subtree_root->right_subtree;
             }
+
+            if (_state.empty())
+            {
+                return;
+            }
+            allocator::construct(_data->_key, _state.top()->key);
+            allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
+        }
 
         explicit infix_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
@@ -1018,12 +1051,15 @@ public:
         }
 
         infix_iterator(
-            infix_iterator &&other) noexcept  //pointer to _data
+            infix_iterator &&other) noexcept  //pointer to _data ????????????
         {
-            _data = iterator_data(other._data->depth, std::move(other._data->_key), std::move(other._data->_value));
+            _data = new iterator_data(other._data->depth, other._data->get_key(), other._data->get_value());
 
             this->_holder = other._holder;
             other._holder = nullptr;
+
+            allocator::destruct(other._data->_key);
+            allocator::destruct(other._data->_value);
 
             other._data->_is_state_initialized = false;
 
@@ -1032,10 +1068,10 @@ public:
 
             while (!other._state.empty())
             {
-                node* current = other._state.pop();
+                node* current = other._state.top();
+                other._state.top();
                 _state.push(current);
             }
-            other = nullptr;
         }
 
         infix_iterator &operator=(
@@ -1103,7 +1139,6 @@ public:
                 allocator::construct(_data->_value, _state.top()->value);
                 _data->_is_state_initialized = true;
             }
-
             _data->depth = _state.size() - 1;
             _holder->inject_additional_data(_data, _state.top());
         }
@@ -1116,9 +1151,9 @@ public:
         friend class binary_search_tree<tkey, tvalue>;
 
     private:
-        const iterator_data *_data;
-        std::stack<const node *> _state;
-        const binary_search_tree<tkey, tvalue> *_holder;
+        iterator_data *_data;
+        std::stack<node *> _state;
+        binary_search_tree<tkey, tvalue> *_holder;
 
     public:
         explicit infix_const_iterator(
@@ -1130,21 +1165,23 @@ public:
         explicit infix_const_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data) :  _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)),
+                                   _data(data)
         {
             while (subtree_root != nullptr)
             {
                 _state.push(subtree_root);
-                subtree_root = subtree_root->left_subtree;
+                subtree_root = subtree_root->right_subtree;
             }
 
             if (_state.empty())
             {
                 return;
             }
-
             allocator::construct(_data->_key, _state.top()->key);
             allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
+            
         }
 
         explicit infix_const_iterator(
@@ -1158,9 +1195,17 @@ public:
             {
                 return;
             }
-
-            allocator::construct(_data->_key, _state.top()->key);
-            allocator::construct(_data->_value, _state.top()->value);
+            if (_data->_is_state_initialized)
+            {
+                *(_data->_key) = _state.top()->key;
+                *(_data->_value) = _state.top()->value;
+            }
+            else
+            {
+                allocator::construct(_data->_key, _state.top()->key);
+                allocator::construct(_data->_value, _state.top()->value);
+                _data->_is_state_initialized = true;
+            }
         }
 
  public:
@@ -1322,7 +1367,8 @@ public:
         explicit infix_reverse_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data) :  _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)),
+                                   _data(data)
         {
             while (subtree_root != nullptr)
             {
@@ -1334,9 +1380,9 @@ public:
             {
                 return;
             }
-
             allocator::construct(_data->_key, _state.top()->key);
             allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
         }
 
         explicit infix_reverse_iterator(
@@ -1483,7 +1529,7 @@ public:
             }
 
             _data->depth = _state.size() - 1;
-            _holder->inject_additional_data(_data, _state.top());
+           // _holder->inject_additional_data(_data, _state.top());
         }
         
     };
@@ -1496,9 +1542,9 @@ public:
 
     private:
 
-        const iterator_data *_data;
-        std::stack<const node *> _state;
-        const binary_search_tree<tkey, tvalue> *_holder;
+        iterator_data *_data;
+        std::stack<node *> _state;
+        binary_search_tree<tkey, tvalue> *_holder;
 
     public:
         explicit infix_const_reverse_iterator(
@@ -1510,7 +1556,8 @@ public:
         explicit infix_const_reverse_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data):  _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)),
+                                   _data(data)
         {
             while (subtree_root != nullptr)
             {
@@ -1522,9 +1569,9 @@ public:
             {
                 return;
             }
-
             allocator::construct(_data->_key, _state.top()->key);
             allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
         }
 
         explicit infix_const_reverse_iterator(
@@ -1697,21 +1744,33 @@ public:
         explicit postfix_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data):  _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)),
+                                   _data(data)
         {
             while (subtree_root != nullptr)
             {
                 _state.push(subtree_root);
                 subtree_root = subtree_root->left_subtree;
             }
-
+        
             if (_state.empty())
             {
                 return;
             }
-
+            while(_state.top()->left_subtree != nullptr || _state.top()->right_subtree != nullptr)
+            {
+                if (_state.top()->right_subtree != nullptr)
+                {
+                    _state.push(_state.top()->right_subtree);
+                    while (_state.top()->left_subtree != nullptr)
+                    {
+                        _state.push(_state.top()->left_subtree);
+                    }
+                }
+            }
             allocator::construct(_data->_key, _state.top()->key);
             allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
         }
 
         explicit postfix_iterator(
@@ -1867,9 +1926,9 @@ public:
         friend class binary_search_tree<tkey, tvalue>;
 
     private:
-        const iterator_data *_data;
-        std::stack<const node *> _state;
-        const binary_search_tree<tkey, tvalue> *_holder;
+        iterator_data *_data;
+        std::stack<node *> _state;
+        binary_search_tree<tkey, tvalue> *_holder;
 
     public:
         explicit postfix_const_iterator(
@@ -1881,21 +1940,33 @@ public:
         explicit postfix_const_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data) : _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)),
+                                   _data(data)
         {
             while (subtree_root != nullptr)
             {
                 _state.push(subtree_root);
                 subtree_root = subtree_root->left_subtree;
             }
-
+        
             if (_state.empty())
             {
                 return;
             }
-
+            while(_state.top()->left_subtree != nullptr || _state.top()->right_subtree != nullptr)
+            {
+                if (_state.top()->right_subtree != nullptr)
+                {
+                    _state.push(_state.top()->right_subtree);
+                    while (_state.top()->left_subtree != nullptr)
+                    {
+                        _state.push(_state.top()->left_subtree);
+                    }
+                }
+            }
             allocator::construct(_data->_key, _state.top()->key);
             allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
         }
 
         explicit postfix_const_iterator(
@@ -2063,7 +2134,8 @@ public:
         explicit postfix_reverse_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data):  _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)),
+                                   _data(data)
         {
              _state.push(subtree_root);
 
@@ -2074,6 +2146,7 @@ public:
 
             allocator::construct(_data->_key, _state.top()->key);
             allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
         }
 
         explicit postfix_reverse_iterator(
@@ -2231,9 +2304,9 @@ public:
 
     private:
         
-        const iterator_data *_data;
-        std::stack<const node *> _state;
-        const binary_search_tree<tkey, tvalue> *_holder;
+        iterator_data *_data;
+        std::stack<node *> _state;
+        binary_search_tree<tkey, tvalue> *_holder;
 
     public:
         explicit postfix_const_reverse_iterator(
@@ -2245,7 +2318,8 @@ public:
         explicit postfix_const_reverse_iterator(
             binary_search_tree<tkey, tvalue> const *holder,
             typename binary_search_tree<tkey, tvalue>::node *subtree_root,
-            iterator_data *data)
+            iterator_data *data):  _holder(const_cast<binary_search_tree<tkey, tvalue> *>(holder)),
+                                   _data(data)
         {
              _state.push(subtree_root);
 
@@ -2256,6 +2330,7 @@ public:
 
             allocator::construct(_data->_key, _state.top()->key);
             allocator::construct(_data->_value, _state.top()->value);
+            _data->_is_state_initialized = true;
         }
 
         explicit postfix_const_reverse_iterator(
@@ -2490,7 +2565,7 @@ protected:
     class template_method_basics:
         public logger_guardant
     {
-    
+    friend class binary_search_tree<int, std::string>;
     protected:
     
         binary_search_tree<tkey, tvalue> *_tree;
@@ -2574,8 +2649,19 @@ protected:
             typename binary_search_tree<tkey, tvalue>::insertion_of_existent_key_attempt_strategy insertion_strategy) noexcept;
     
     private:
-        
-        [[nodiscard]] allocator *get_allocator() const noexcept final;
+        void *allocate_with_guard_my(
+            size_t value_size,
+            size_t values_count) const
+        {
+            allocator *target_allocator = get_allocator();
+            return target_allocator == nullptr
+                       ? ::operator new(value_size * values_count)
+                       : target_allocator->allocate(value_size, values_count);
+        }
+        [[nodiscard]] allocator *get_allocator() const noexcept final
+        {
+        return this->_tree->get_allocator();
+        }
         
     };
     
@@ -2601,7 +2687,6 @@ protected:
         {
             std::vector<typename associative_container<tkey, tvalue>::key_value_pair> range;
 
-            // TODO: this should be computed
             std::stack<node *> path;
             node *current = this->_tree->_root;
             while (true)
@@ -2716,7 +2801,7 @@ protected:
         typename binary_search_tree<tkey, tvalue>::disposal_template_method *disposal_template,
         std::function<int(tkey const &, tkey const &)>,
         allocator *allocator,
-        logger *logger);
+        logger *logger); //зачем это
 
 public:
     
@@ -2769,14 +2854,22 @@ private:
             return nullptr;
         }
 
-        node *subtree_root_copied = reinterpret_cast<node *>(this->allocate_with_guard(get_node_size(), 1));
+        node *subtree_root_copied = reinterpret_cast<node *>(this->allocate_with_guard_my(get_node_size(), 1));
         call_node_constructor(subtree_root_copied, subtree_root->key, subtree_root->value);
         subtree_root_copied->left_subtree = copy(subtree_root->left_subtree);
         subtree_root_copied->right_subtree = copy(subtree_root->right_subtree);
 
         return subtree_root_copied;
     }
-
+    void *allocate_with_guard_my(
+        size_t value_size,
+        size_t values_count) const
+    {
+        allocator *target_allocator = template_method_basics::get_allocator();
+        return target_allocator == nullptr
+                   ? ::operator new(value_size * values_count)
+                   : target_allocator->allocate(value_size, values_count);
+    }
     virtual size_t get_node_size() const noexcept
     {
         return sizeof(typename binary_search_tree<tkey, tvalue>::node);
@@ -2803,7 +2896,7 @@ private:
         iterator_data *destination,
         node *source)
     {
-
+        //это зачем
     }
 
     virtual iterator_data *create_iterator_data() const
@@ -3204,7 +3297,7 @@ typename binary_search_tree<tkey, tvalue>::prefix_reverse_iterator &binary_searc
 {
     if (_state.empty())
     {
-        // undefined behavior
+        // undefined behavior plk
         return *this;
     }
     node* current = _state.top();
@@ -3220,16 +3313,19 @@ typename binary_search_tree<tkey, tvalue>::prefix_reverse_iterator &binary_searc
         {
             if (_state.top()->left_subtree != nullptr)
             {
-                _state.push(_state.top()->left_subtree);
-                if (_state.top()->right_subtree != nullptr)
+               while (_state.top()->right_subtree != nullptr || _state.top()->left_subtree != nullptr)
                 {
-                    while (_state.top()->right_subtree != nullptr)
+                    if (_state.top()->left_subtree != nullptr)
                     {
-                        _state.push(_state.top()->right_subtree);
+                        _state.push(_state.top()->left_subtree);
+                        while (_state.top()->right_subtree != nullptr)
+                        {
+                            _state.push(_state.top()->right_subtree);
+                        }
                     }
-                    assign_data();
-                    return *this;
-                }   
+                }
+                assign_data();
+                return *this;
             }
             else
             {
@@ -3239,7 +3335,7 @@ typename binary_search_tree<tkey, tvalue>::prefix_reverse_iterator &binary_searc
         } while (true);
         
     }
-    else if (parent->left_subtree == current)
+    else 
     {
         assign_data();
         return *this;
@@ -3308,7 +3404,7 @@ typename binary_search_tree<tkey, tvalue>::prefix_const_reverse_iterator &binary
 {
     if (_state.empty())
     {
-        // undefined behavior
+        // undefined behavior plk
         return *this;
     }
     node* current = _state.top();
@@ -3324,16 +3420,19 @@ typename binary_search_tree<tkey, tvalue>::prefix_const_reverse_iterator &binary
         {
             if (_state.top()->left_subtree != nullptr)
             {
-                _state.push(_state.top()->left_subtree);
-                if (_state.top()->right_subtree != nullptr)
+               while (_state.top()->right_subtree != nullptr || _state.top()->left_subtree != nullptr)
                 {
-                    while (_state.top()->right_subtree != nullptr)
+                    if (_state.top()->left_subtree != nullptr)
                     {
-                        _state.push(_state.top()->right_subtree);
+                        _state.push(_state.top()->left_subtree);
+                        while (_state.top()->right_subtree != nullptr)
+                        {
+                            _state.push(_state.top()->right_subtree);
+                        }
                     }
-                    assign_data();
-                    return *this;
                 }
+                assign_data();
+                return *this;
             }
             else
             {
@@ -3343,7 +3442,7 @@ typename binary_search_tree<tkey, tvalue>::prefix_const_reverse_iterator &binary
         } while (true);
         
     }
-    else if (parent->left_subtree == current)
+    else
     {
         assign_data();
         return *this;
@@ -3414,7 +3513,7 @@ typename binary_search_tree<tkey, tvalue>::infix_iterator &binary_search_tree<tk
         // undefined behavior
         return *this;
     }
-
+    //logger* lg = get_logger(); todo
     if (_state.top()->right_subtree != nullptr)
     {
         _state.push(_state.top()->right_subtree);
@@ -3422,7 +3521,6 @@ typename binary_search_tree<tkey, tvalue>::infix_iterator &binary_search_tree<tk
         {
             _state.push(_state.top()->left_subtree);
         }
-
         assign_data();
     }
     else
@@ -3800,6 +3898,11 @@ typename binary_search_tree<tkey, tvalue>::postfix_iterator &binary_search_tree<
     }
     node* current = _state.top();
     _state.pop();
+    if (_state.empty())
+    {
+        // undefined behavior
+        return *this;
+    }
     node* parent = _state.top();
     if (parent->left_subtree == current)
     {
@@ -3807,16 +3910,19 @@ typename binary_search_tree<tkey, tvalue>::postfix_iterator &binary_search_tree<
         {
             if (_state.top()->right_subtree != nullptr)
             {
-                _state.push(_state.top()->right_subtree);
-                if (_state.top()->left_subtree != nullptr)
+                while (_state.top()->left_subtree != nullptr || _state.top()->right_subtree != nullptr)
                 {
-                    while (_state.top()->left_subtree != nullptr)
+                    if (_state.top()->right_subtree != nullptr)
                     {
-                        _state.push(_state.top()->left_subtree);
+                        _state.push(_state.top()->right_subtree);
+                        while (_state.top()->left_subtree != nullptr)
+                        {
+                            _state.push(_state.top()->left_subtree);
+                        }
                     }
-                    assign_data();
-                    return *this;
                 }
+                assign_data();
+                return *this;
             }
             else
             {
@@ -3905,16 +4011,19 @@ typename binary_search_tree<tkey, tvalue>::postfix_const_iterator &binary_search
         {
             if (_state.top()->right_subtree != nullptr)
             {
-                _state.push(_state.top()->right_subtree);
-                if (_state.top()->left_subtree != nullptr)
+                while (_state.top()->left_subtree != nullptr || _state.top()->right_subtree != nullptr)
                 {
-                    while (_state.top()->left_subtree != nullptr)
+                    if (_state.top()->right_subtree != nullptr)
                     {
-                        _state.push(_state.top()->left_subtree);
+                        _state.push(_state.top()->right_subtree);
+                        while (_state.top()->left_subtree != nullptr)
+                        {
+                            _state.push(_state.top()->left_subtree);
+                        }
                     }
-                    assign_data();
-                    return *this;
                 }
+                assign_data();
+                return *this;
             }
             else
             {
@@ -3994,38 +4103,45 @@ typename binary_search_tree<tkey, tvalue>::postfix_reverse_iterator &binary_sear
         // undefined behavior
         return *this;
     }
-
-    if (_state.top()->right_subtree != nullptr)
+    node* current = _state.top();
+    _state.pop();
+    if (_state.empty())
     {
-        _state.push(_state.top()->right_subtree);
-        assign_data();
+        // undefined behavior
+        return *this;
     }
-    else if (_state.top()->left_subtree != nullptr)
-    {
-        _state.push(_state.top()->left_subtree);
-        assign_data();
-    }
-    else
+    node* parent = _state.top();
+    if (parent->left_subtree == current)
     {
         do
         {
-            node *current = _state.top();
-            _state.pop();
-            if (_state.empty())
+            if (_state.top()->right_subtree != nullptr)
             {
-                return *this;
-            }
-            if (_state.top()->right_subtree == current)
-            {
-                if (_state.top()->left_subtree != nullptr)
+                while (_state.top()->left_subtree != nullptr || _state.top()->right_subtree != nullptr)
                 {
-                _state.push(_state.top()->left_subtree);
+                    if (_state.top()->right_subtree != nullptr)
+                    {
+                        _state.push(_state.top()->right_subtree);
+                        while (_state.top()->left_subtree != nullptr)
+                        {
+                            _state.push(_state.top()->left_subtree);
+                        }
+                    }
+                }
                 assign_data();
                 return *this;
-                }
+            }
+            else
+            {
+                assign_data();
+                return *this;
             }
         } while (true);
-        
+    }
+    else
+    {
+        assign_data();
+        return *this;
     }
 }
 
@@ -4233,7 +4349,7 @@ template<
     typename tvalue>
 [[nodiscard]] inline logger *binary_search_tree<tkey, tvalue>::template_method_basics::get_logger() const noexcept
 {
-    throw not_implemented("template<typename tkey, typename tvalue> [[nodiscard]] inline logger *binary_search_tree<tkey, tvalue>::template_method_basics::get_logger() const noexcept", "your code should be here...");
+    return get_logger();
 }
 
 // endregion binary_search_tree<tkey, tvalue>::template_method_basics implementation
@@ -4273,8 +4389,7 @@ void binary_search_tree<tkey, tvalue>::insertion_template_method::insert(
 
         return;
     }
-
-    this->_tree->call_node_constructor(*(path.top()) = reinterpret_cast<node *>(allocate_with_guard(this->_tree->get_node_size(), 1)), key, value);
+    this->_tree->call_node_constructor(*(path.top()) = reinterpret_cast<node *>(allocate_with_guard_my(this->_tree->get_node_size(), 1)), key, value);
 
     this->balance(path);
 }
@@ -4301,7 +4416,7 @@ void binary_search_tree<tkey, tvalue>::insertion_template_method::insert(
         return;
     }
 
-    this->_tree->call_node_constructor(*(path.top()) = reinterpret_cast<node *>(allocate_with_guard(this->_tree->get_node_size(), 1)), key, std::move(value));
+    this->_tree->call_node_constructor(*(path.top()) = reinterpret_cast<node *>(allocate_with_guard_my(this->_tree->get_node_size(), 1)), key, std::move(value));
 
     this->balance(path);
 }
@@ -4315,13 +4430,6 @@ void binary_search_tree<tkey, tvalue>::insertion_template_method::set_insertion_
     _insertion_strategy = insertion_strategy;
 }
 
-template<
-    typename tkey,
-    typename tvalue>
-allocator *binary_search_tree<tkey, tvalue>::insertion_template_method::get_allocator() const noexcept
-{
-    return this->_tree->get_allocator();
-}
 
 // endregion search_tree<tkey, tvalue>::insertion_template_method implementation
 
@@ -4639,7 +4747,7 @@ template<
 void binary_search_tree<tkey, tvalue>::set_insertion_strategy(
     typename binary_search_tree<tkey, tvalue>::insertion_of_existent_key_attempt_strategy insertion_strategy) noexcept
 {
-    throw not_implemented("template<typename tkey, typename tvalue> void binary_search_tree<tkey, tvalue>::set_insertion_strategy(typename binary_search_tree<tkey, tvalue>::insertion_of_existent_key_strategy) noexcept", "your code should be here...");
+    this->_insertion_template->_insertion_strategy = insertion_strategy;
 }
 
 template<
@@ -4648,7 +4756,7 @@ template<
 void binary_search_tree<tkey, tvalue>::set_removal_strategy(
     typename binary_search_tree<tkey, tvalue>::disposal_of_nonexistent_key_attempt_strategy disposal_strategy) noexcept
 {
-    throw not_implemented("template<typename tkey, typename tvalue> void binary_search_tree<tkey, tvalue>::set_removal_strategy(typename binary_search_tree<tkey, tvalue>::disposal_of_nonexistent_key_strategy) noexcept", "your code should be here...");
+    this->_disposal_template->_disposal_strategy = disposal_strategy;
 }
 
 // region iterators requesting implementation
@@ -4973,6 +5081,8 @@ void binary_search_tree<tkey, tvalue>::double_right_rotation(
 
     small_right_rotation(subtree_root, validate);
 }
+
+
 
 // endregion subtree rotations implementation
 

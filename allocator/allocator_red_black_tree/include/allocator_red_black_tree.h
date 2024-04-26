@@ -29,16 +29,16 @@ public:
     ~allocator_red_black_tree() override;
 
     allocator_red_black_tree(
-        allocator_red_black_tree const &other);
+        allocator_red_black_tree const &other) = delete;
 
     allocator_red_black_tree &operator=(
-        allocator_red_black_tree const &other);
+        allocator_red_black_tree const &other) = delete;
 
     allocator_red_black_tree(
-        allocator_red_black_tree &&other) noexcept;
+        allocator_red_black_tree &&other) noexcept = delete;
 
     allocator_red_black_tree &operator=(
-        allocator_red_black_tree &&other) noexcept;
+        allocator_red_black_tree &&other) noexcept = delete;
 
 public:
 
@@ -114,10 +114,13 @@ private:
 
     void insert_tree(void* block, size_t size);
 
-    void delete_block(void* block);
+    void delete_from_tree(void* block);
 
     void left_rotate(void* block);
     void right_rotate(void* block);
+    void rebalance_after_delete(void* block, bool);
+
+    size_t get_all_size() const;
 
 public:
 

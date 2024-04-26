@@ -41,20 +41,26 @@ TEST(positive_tests, test1) {
     allocator *alloc = new allocator_red_black_tree(3000, nullptr, logger, allocator_with_fit_mode::fit_mode::first_fit);
 
 
-    auto first_block = reinterpret_cast<int *>(alloc->allocate(sizeof(int), 250));
+    auto first_block = reinterpret_cast<int *>(alloc->allocate(sizeof(int), 50));
 
     auto second_block = reinterpret_cast<char *>(alloc->allocate(sizeof(int), 25));
-    //alloc->deallocate(first_block);
+    alloc->deallocate(first_block);
+    auto block9 = reinterpret_cast<int *>(alloc->allocate(sizeof(int), 4));
+    auto third_block = reinterpret_cast<int *>(alloc->allocate(sizeof(int), 30));
 
-    // first_block = reinterpret_cast<int *>(alloc->allocate(sizeof(int), 245));
-
-
-    // alloc->deallocate(second_block);
-    // alloc->deallocate(first_block);
+    auto block = reinterpret_cast<int *>(alloc->allocate(sizeof(int), 45));
+    alloc->deallocate(second_block);
+    auto block10 = reinterpret_cast<int *>(alloc->allocate(sizeof(int), 100));
+    alloc->deallocate(third_block);
+    alloc->deallocate(block9);
+    auto block5 = reinterpret_cast<int*>(alloc->allocate(sizeof(int), 250));
+    alloc->deallocate(block);
+    alloc->deallocate(block5);
+    alloc->deallocate(block10);
 
     // //TODO: Проверка
 
-    // delete alloc;
+    delete alloc;
 }
 
 int main(

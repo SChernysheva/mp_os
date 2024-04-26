@@ -47,3 +47,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/binary_search_tree/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree/cmake_install.cmake")
+endif()
+

@@ -1,2 +1,2 @@
-[19.04.2024] [15:12:38] [TRACE] AVLTreePositiveTests.test11 started 
-[19.04.2024] [15:12:38] [TRACE] AVLTreePositiveTests.test11 finished 
+[19.04.2024] [15:33:20] [TRACE] AVLTreePositiveTests.test11 started 
+[19.04.2024] [15:33:20] [TRACE] AVLTreePositiveTests.test11 finished 

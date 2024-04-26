@@ -520,6 +520,24 @@ mp_os_assctv_cntnr_IS_TOP_LEVEL:STATIC=OFF
 mp_os_assctv_cntnr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container
 
 //Value Computed by CMake
+mp_os_assctv_cntnr_hsh_tbl_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/hash_table
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_hsh_tbl_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_hsh_tbl_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/hash_table
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_hsh_tbl_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/hash_table/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_hsh_tbl_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_hsh_tbl_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/hash_table/tests
+
+//Value Computed by CMake
 mp_os_assctv_cntnr_srch_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree
 
 //Value Computed by CMake
@@ -617,6 +635,87 @@ mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_tests_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
 mp_os_assctv_cntnr_srch_tr_bnr_srch_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/binary_search_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_pls_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree/b_plus_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_pls_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_pls_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_plus_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_pls_tr_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree/b_plus_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_pls_tr_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_pls_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_plus_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_pls_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree/b_star_plus_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_pls_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_pls_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_star_plus_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_pls_tr_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree/b_star_plus_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_pls_tr_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_pls_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_star_plus_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree/b_star_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_star_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_tr_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree/b_star_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_tr_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_str_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_star_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_tr_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree/b_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_tr_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_tr_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_tree
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_tr_tests_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/associative_container/search_tree/indexing_tree/b_tree/tests
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_tr_tests_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+mp_os_assctv_cntnr_srch_tr_indxng_tr_b_tr_tests_SOURCE_DIR:STATIC=/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_tree/tests
 
 //Value Computed by CMake
 mp_os_cmmn_BINARY_DIR:STATIC=/mnt/c/labs/laba5/mp_os/build/common
@@ -842,7 +941,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=36
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=47
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

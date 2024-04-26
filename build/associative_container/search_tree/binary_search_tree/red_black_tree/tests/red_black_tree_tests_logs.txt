@@ -1,0 +1,2 @@
+[26.04.2024] [14:27:13] [TRACE] redBlackTreePositiveTests.test11 started 
+[26.04.2024] [14:27:13] [TRACE] redBlackTreePositiveTests.test11 finished 

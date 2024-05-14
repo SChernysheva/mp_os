@@ -146,11 +146,6 @@ private:
                 // todo throw
                 return;
             }
-            if ((*path.top()) == nullptr)
-            {
-                path.pop();
-                if (!path.empty()) balance1(path, tree);
-            }
             AVL_tree<tkey, tvalue>::node *current = reinterpret_cast<typename AVL_tree<tkey, tvalue>::node *>(*(path.top()));
             path.pop();
             int balance = get_balance_node(current);
@@ -300,10 +295,11 @@ private:
         void balance(
             std::stack<typename binary_search_tree<tkey, tvalue>::node **> &path) override
         {
-            if (*(path.top()) == nullptr) 
-            {
-                path.pop();
-            }
+            // if (*(path.top()) == nullptr) 
+            // {
+            //     path.pop();
+            // }
+            path.pop();
             this->balance1(path, dynamic_cast<AVL_tree<tkey, tvalue> const *>(this->_tree));
         }
         

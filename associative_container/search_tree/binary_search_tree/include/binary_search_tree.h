@@ -318,7 +318,11 @@ public:
         prefix_iterator(
             prefix_iterator &&other) noexcept : _holder(other._holder)
         {
-            _data = iterator_data(other._data->depth, other._data->get_key(), other._data->get_value());
+            //_data = iterator_data(other._data->depth, other._data->get_key(), other._data->get_value());
+            allocator::construct(_data->_key, other._data->_key);
+            allocator::construct(_data->_value, other._data->_value);
+            _data->_is_state_initialized = true;
+            _data->depth = other._data->depth;
             allocator::destruct(other._data->_key);
             allocator::destruct(other._data->_value);
 
@@ -2783,7 +2787,7 @@ protected:
         public allocator_guardant
     {
 
-    private:
+    protected:
 
         binary_search_tree<tkey, tvalue>::disposal_of_nonexistent_key_attempt_strategy _disposal_strategy;
     

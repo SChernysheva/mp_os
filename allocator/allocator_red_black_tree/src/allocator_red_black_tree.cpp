@@ -55,7 +55,7 @@ allocator_red_black_tree::allocator_red_black_tree(
     }
     catch (std::bad_alloc const &ex)
     {
-        logger->error("can't get memory");///!!!!!!!
+        logger->error("can't get memory");
         sem_t *sem = get_sem();
         sem_unlink("/my_semaphore");
         sem_close(sem);
@@ -83,7 +83,10 @@ allocator_red_black_tree::allocator_red_black_tree(
         perror("sem_open");
         sem_unlink("/my_semaphore"); 
         sem_close(*sem);
-        exit(1);
+        if (parent_allocator) parent_allocator->deallocate(_trusted_memory);
+        else delete _trusted_memory;
+        throw std::logic_error("all is bed");
+       //// exit(1); 
     }
     void **root = reinterpret_cast<void **>(sem + 1);
     *root = reinterpret_cast<void *>(root + 1);
@@ -154,7 +157,6 @@ allocator_red_black_tree::allocator_red_black_tree(
     {
         std::__throw_logic_error("nullptr");
     }
-    std::cout << std::to_string(get_size_aviable_block(target_block)) << std::endl;
     auto real_size = get_size_aviable_block(target_block) + get_meta_size_aviable_block() - sizeof(void*) * 3 - sizeof(bool);
     auto difference = real_size - requested_size;
     void* next_to_target = get_next_block(target_block);
@@ -283,7 +285,7 @@ void allocator_red_black_tree::deallocate(
         log_with_guard_my("finish dellocate memory", logger::severity::debug);
         std::vector<allocator_test_utils::block_info> data = get_blocks_info();
         std::string data_str;
-        for (block_info value : data)
+        for (block_info const &value : data)
         {
             std::string is_oc = value.is_block_occupied ? "YES" : "NO";
             data_str += (is_oc + "  " + std::to_string(value.block_size) + " | ");

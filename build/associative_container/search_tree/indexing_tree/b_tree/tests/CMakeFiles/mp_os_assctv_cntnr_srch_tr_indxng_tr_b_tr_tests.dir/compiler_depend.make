@@ -28,57 +28,56 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
   _deps/googletest-src/googletest/include/gtest/internal/gtest-port.h \
   _deps/googletest-src/googletest/include/gtest/internal/gtest-string.h \
   _deps/googletest-src/googletest/include/gtest/internal/gtest-type-util.h \
+  _deps/json-src/include/nlohmann/adl_serializer.hpp \
+  _deps/json-src/include/nlohmann/byte_container_with_subtype.hpp \
+  _deps/json-src/include/nlohmann/detail/abi_macros.hpp \
+  _deps/json-src/include/nlohmann/detail/conversions/from_json.hpp \
+  _deps/json-src/include/nlohmann/detail/conversions/to_chars.hpp \
+  _deps/json-src/include/nlohmann/detail/conversions/to_json.hpp \
+  _deps/json-src/include/nlohmann/detail/exceptions.hpp \
+  _deps/json-src/include/nlohmann/detail/hash.hpp \
+  _deps/json-src/include/nlohmann/detail/input/binary_reader.hpp \
+  _deps/json-src/include/nlohmann/detail/input/input_adapters.hpp \
+  _deps/json-src/include/nlohmann/detail/input/json_sax.hpp \
+  _deps/json-src/include/nlohmann/detail/input/lexer.hpp \
+  _deps/json-src/include/nlohmann/detail/input/parser.hpp \
+  _deps/json-src/include/nlohmann/detail/input/position_t.hpp \
+  _deps/json-src/include/nlohmann/detail/iterators/internal_iterator.hpp \
+  _deps/json-src/include/nlohmann/detail/iterators/iter_impl.hpp \
+  _deps/json-src/include/nlohmann/detail/iterators/iteration_proxy.hpp \
+  _deps/json-src/include/nlohmann/detail/iterators/iterator_traits.hpp \
+  _deps/json-src/include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
+  _deps/json-src/include/nlohmann/detail/iterators/primitive_iterator.hpp \
+  _deps/json-src/include/nlohmann/detail/json_pointer.hpp \
+  _deps/json-src/include/nlohmann/detail/json_ref.hpp \
+  _deps/json-src/include/nlohmann/detail/macro_scope.hpp \
+  _deps/json-src/include/nlohmann/detail/macro_unscope.hpp \
+  _deps/json-src/include/nlohmann/detail/meta/call_std/begin.hpp \
+  _deps/json-src/include/nlohmann/detail/meta/call_std/end.hpp \
+  _deps/json-src/include/nlohmann/detail/meta/cpp_future.hpp \
+  _deps/json-src/include/nlohmann/detail/meta/detected.hpp \
+  _deps/json-src/include/nlohmann/detail/meta/identity_tag.hpp \
+  _deps/json-src/include/nlohmann/detail/meta/is_sax.hpp \
+  _deps/json-src/include/nlohmann/detail/meta/std_fs.hpp \
+  _deps/json-src/include/nlohmann/detail/meta/type_traits.hpp \
+  _deps/json-src/include/nlohmann/detail/meta/void_t.hpp \
+  _deps/json-src/include/nlohmann/detail/output/binary_writer.hpp \
+  _deps/json-src/include/nlohmann/detail/output/output_adapters.hpp \
+  _deps/json-src/include/nlohmann/detail/output/serializer.hpp \
+  _deps/json-src/include/nlohmann/detail/string_concat.hpp \
+  _deps/json-src/include/nlohmann/detail/string_escape.hpp \
+  _deps/json-src/include/nlohmann/detail/value_t.hpp \
+  _deps/json-src/include/nlohmann/json.hpp \
+  _deps/json-src/include/nlohmann/json_fwd.hpp \
+  _deps/json-src/include/nlohmann/ordered_map.hpp \
+  _deps/json-src/include/nlohmann/thirdparty/hedley/hedley.hpp \
+  _deps/json-src/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
   /mnt/c/labs/laba5/mp_os/common/include/not_implemented.h \
   /mnt/c/labs/laba5/mp_os/common/include/operation_not_supported.h \
   /mnt/c/labs/laba5/mp_os/logger/logger/include/logger.h \
   /mnt/c/labs/laba5/mp_os/logger/logger/include/logger_builder.h \
   /mnt/c/labs/laba5/mp_os/logger/client_logger/include/client_logger.h \
   /mnt/c/labs/laba5/mp_os/logger/client_logger/include/client_logger_builder.h \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/adl_serializer.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/byte_container_with_subtype.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/abi_macros.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/conversions/from_json.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/conversions/to_chars.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/conversions/to_json.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/exceptions.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/hash.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/binary_reader.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/input_adapters.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/json_sax.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/lexer.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/parser.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/position_t.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/internal_iterator.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/iter_impl.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/iteration_proxy.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/iterator_traits.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/primitive_iterator.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/json_custom_base_class.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/json_pointer.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/json_ref.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/macro_scope.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/macro_unscope.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/call_std/begin.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/call_std/end.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/cpp_future.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/detected.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/identity_tag.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/is_sax.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/std_fs.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/type_traits.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/void_t.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/output/binary_writer.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/output/output_adapters.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/output/serializer.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/string_concat.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/string_escape.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/value_t.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/json.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/json_fwd.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/ordered_map.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/thirdparty/hedley/hedley.hpp \
-  /mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
   /mnt/c/labs/laba5/mp_os/logger/logger/include/logger.h \
   /mnt/c/labs/laba5/mp_os/logger/logger/include/logger_builder.h \
   /mnt/c/labs/laba5/mp_os/logger/logger/include/logger_guardant.h \
@@ -444,8 +443,6 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/time_members.h:
 
-/usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h:
-
 /usr/include/x86_64-linux-gnu/c++/9/bits/opt_random.h:
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/messages_members.h:
@@ -478,7 +475,11 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 
 /usr/include/x86_64-linux-gnu/bits/types/stack_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+/usr/include/x86_64-linux-gnu/c++/9/bits/c++locale.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigval_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
@@ -504,8 +505,6 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
-
 /usr/include/x86_64-linux-gnu/bits/sys_errlist.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
@@ -514,21 +513,17 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
-/usr/include/x86_64-linux-gnu/bits/timex.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
+/usr/include/x86_64-linux-gnu/bits/sigstack.h:
 
 /usr/include/x86_64-linux-gnu/bits/signum.h:
 
 /usr/include/x86_64-linux-gnu/bits/signal_ext.h:
+
+/usr/include/x86_64-linux-gnu/bits/siginfo-consts.h:
 
 /usr/include/x86_64-linux-gnu/bits/siginfo-consts-arch.h:
 
@@ -558,21 +553,19 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/usr/include/x86_64-linux-gnu/bits/confname.h:
-
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
-/usr/include/x86_64-linux-gnu/asm/types.h:
+/usr/include/x86_64-linux-gnu/c++/9/bits/c++allocator.h:
+
+/usr/include/x86_64-linux-gnu/asm/posix_types.h:
 
 /usr/include/x86_64-linux-gnu/asm/bitsperlong.h:
 
@@ -581,8 +574,6 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 /usr/include/unistd.h:
 
 /usr/include/string.h:
-
-/usr/include/stdio.h:
 
 /usr/include/strings.h:
 
@@ -602,15 +593,11 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 
 /usr/include/linux/stddef.h:
 
-/usr/include/linux/stat.h:
-
 /usr/include/linux/posix_types.h:
 
 /usr/include/linux/errno.h:
 
 /usr/include/libintl.h:
-
-/usr/include/errno.h:
 
 /usr/include/stdint.h:
 
@@ -622,23 +609,19 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 
 /usr/include/c++/9/utility:
 
-/usr/include/x86_64-linux-gnu/asm/errno.h:
-
-/usr/include/c++/9/bits/istream.tcc:
-
-/usr/include/c++/9/bits/stl_multiset.h:
+/usr/include/c++/9/bits/hashtable_policy.h:
 
 /usr/include/c++/9/bits/stl_iterator.h:
 
 /usr/include/c++/9/istream:
 
+/usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h:
+
+/usr/include/c++/9/bits/exception_ptr.h:
+
 /usr/include/c++/9/bits/erase_if.h:
 
 /usr/include/c++/9/bits/vector.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/errno.h:
-
-/usr/include/c++/9/cassert:
 
 /usr/include/c++/9/cmath:
 
@@ -650,15 +633,15 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 
 /usr/include/c++/9/iterator:
 
-/usr/include/features.h:
-
-/usr/include/c++/9/bits/codecvt.h:
+/usr/include/c++/9/bits/concept_check.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
 /usr/include/c++/9/ios:
 
-/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_tree/tests/b_tree_tests.cpp:
+/usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h:
+
+/usr/include/c++/9/bits/basic_ios.h:
 
 /usr/include/c++/9/atomic:
 
@@ -666,15 +649,23 @@ associative_container/search_tree/indexing_tree/b_tree/tests/CMakeFiles/mp_os_as
 
 /usr/include/c++/9/array:
 
+_deps/json-src/include/nlohmann/detail/value_t.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
 /usr/include/c++/9/bits/basic_string.h:
+
+_deps/json-src/include/nlohmann/detail/iterators/primitive_iterator.hpp:
 
 /usr/include/c++/9/bits/postypes.h:
 
 _deps/googletest-src/googletest/include/gtest/gtest_prod.h:
 
 /mnt/c/labs/laba5/mp_os/logger/client_logger/include/client_logger.h:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+
+_deps/json-src/include/nlohmann/detail/meta/call_std/end.hpp:
 
 /usr/include/c++/9/ext/concurrence.h:
 
@@ -684,6 +675,8 @@ _deps/googletest-src/googletest/include/gtest/gtest_prod.h:
 
 /usr/include/asm-generic/errno.h:
 
+_deps/json-src/include/nlohmann/detail/hash.hpp:
+
 /usr/include/c++/9/ext/aligned_buffer.h:
 
 /usr/include/c++/9/bits/fstream.tcc:
@@ -692,75 +685,11 @@ _deps/googletest-src/googletest/include/gtest/gtest_prod.h:
 
 /usr/include/c++/9/stack:
 
-/usr/include/c++/9/bits/gslice_array.h:
-
-/usr/include/c++/9/ostream:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/thirdparty/hedley/hedley.hpp:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/byte_container_with_subtype.hpp:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/ordered_map.hpp:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/output/serializer.hpp:
-
-/usr/include/c++/9/list:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/output/output_adapters.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/9/bits/ctype_inline.h:
-
-/usr/include/c++/9/bits/locale_facets.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/void_t.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/siginfo-consts.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/input_adapters.hpp:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/string_concat.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/9/bits/c++allocator.h:
-
-/usr/include/x86_64-linux-gnu/asm/posix_types.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/type_traits.hpp:
-
-/mnt/c/labs/laba5/mp_os/associative_container/include/associative_container.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/detected.hpp:
-
-/mnt/c/labs/laba5/mp_os/associative_container/search_tree/include/search_tree.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/primitive_iterator.hpp:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/cpp_future.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/sigstack.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/call_std/end.hpp:
-
-/usr/include/c++/9/bits/functexcept.h:
-
-/usr/include/c++/9/bits/stl_map.h:
-
-/usr/include/c++/9/bits/stl_uninitialized.h:
-
-/usr/include/x86_64-linux-gnu/bits/setjmp.h:
-
-/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
-
-/usr/include/time.h:
-
-/usr/include/c++/9/bits/hashtable.h:
-
-_deps/googletest-src/googletest/include/gtest/internal/gtest-string.h:
-
 /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h:
 
 /usr/include/c++/9/bits/gslice.h:
+
+/usr/include/c++/9/bits/ptr_traits.h:
 
 /usr/include/c++/9/ctime:
 
@@ -770,51 +699,71 @@ _deps/googletest-src/googletest/include/gtest/internal/gtest-string.h:
 
 /mnt/c/labs/laba5/mp_os/common/include/not_implemented.h:
 
-/usr/include/ctype.h:
+/usr/include/c++/9/exception:
 
-/usr/include/c++/9/bits/exception.h:
+_deps/json-src/include/nlohmann/json_fwd.hpp:
 
-/usr/include/x86_64-linux-gnu/sys/select.h:
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
-_deps/googletest-src/googletest/include/gtest/gtest-matchers.h:
+/usr/include/c++/9/bits/std_function.h:
+
+_deps/json-src/include/nlohmann/detail/string_concat.hpp:
 
 /mnt/c/labs/laba5/mp_os/common/include/operation_not_supported.h:
 
 /usr/include/alloca.h:
 
+/usr/include/x86_64-linux-gnu/sys/select.h:
+
+_deps/googletest-src/googletest/include/gtest/gtest-matchers.h:
+
+_deps/json-src/include/nlohmann/detail/output/serializer.hpp:
+
+/usr/include/ctype.h:
+
+/usr/include/c++/9/bits/exception.h:
+
+/usr/include/c++/9/bits/locale_classes.h:
+
+/usr/include/c++/9/stdlib.h:
+
 _deps/googletest-src/googletest/include/gtest/internal/gtest-port-arch.h:
 
-_deps/googletest-src/googletest/include/gtest/internal/gtest-param-util.h:
+/usr/include/x86_64-linux-gnu/bits/timex.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/is_sax.hpp:
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+_deps/json-src/include/nlohmann/adl_serializer.hpp:
+
+/usr/include/c++/9/bits/random.h:
 
 _deps/googletest-src/googletest/include/gtest/internal/gtest-death-test-internal.h:
 
 /usr/include/c++/9/bits/uniform_int_dist.h:
 
-_deps/googletest-src/googletest/include/gtest/internal/custom/gtest-port.h:
+_deps/googletest-src/googletest/include/gtest/internal/gtest-param-util.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/thirdparty/hedley/hedley_undef.hpp:
+_deps/json-src/include/nlohmann/detail/meta/cpp_future.hpp:
+
+_deps/googletest-src/googletest/include/gtest/internal/custom/gtest-printers.h:
+
+/usr/include/c++/9/algorithm:
+
+/usr/include/c++/9/chrono:
+
+/usr/include/c++/9/bits/algorithmfwd.h:
+
+/usr/include/c++/9/bits/list.tcc:
+
+/usr/include/c++/9/mutex:
+
+/usr/include/c++/9/bits/stringfwd.h:
+
+_deps/googletest-src/googletest/include/gtest/internal/custom/gtest-port.h:
 
 _deps/googletest-src/googletest/include/gtest/internal/gtest-internal.h:
 
 _deps/googletest-src/googletest/include/gtest/gtest-typed-test.h:
-
-/usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h:
-
-/usr/include/c++/9/bits/basic_ios.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/std_fs.hpp:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/call_std/begin.hpp:
-
-/usr/include/c++/9/bits/concept_check.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/c++/9/backward/auto_ptr.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/meta/identity_tag.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
@@ -822,79 +771,135 @@ _deps/googletest-src/googletest/include/gtest/gtest-typed-test.h:
 
 /usr/include/c++/9/ext/alloc_traits.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+/usr/include/x86_64-linux-gnu/bits/locale.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/iteration_proxy.hpp:
+_deps/json-src/include/nlohmann/thirdparty/hedley/hedley_undef.hpp:
 
-/usr/include/assert.h:
+/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 
-/usr/include/c++/9/bits/forward_list.h:
+_deps/googletest-src/googletest/include/gtest/gtest-param-test.h:
+
+_deps/json-src/include/nlohmann/detail/abi_macros.hpp:
+
+_deps/json-src/include/nlohmann/thirdparty/hedley/hedley.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/setjmp.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
+/usr/include/time.h:
+
+/usr/include/c++/9/bits/hashtable.h:
+
+/usr/include/x86_64-linux-gnu/bits/errno.h:
+
+/usr/include/c++/9/cassert:
+
+_deps/json-src/include/nlohmann/detail/iterators/iterator_traits.hpp:
+
+/mnt/c/labs/laba5/mp_os/allocator/allocator/include/allocator_guardant.h:
+
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+_deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
+
+/usr/include/x86_64-linux-gnu/asm/types.h:
+
+_deps/json-src/include/nlohmann/ordered_map.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/c++/9/backward/auto_ptr.h:
+
+_deps/googletest-src/googletest/include/gtest/gtest-printers.h:
+
+/usr/include/linux/stat.h:
+
+_deps/json-src/include/nlohmann/detail/meta/is_sax.hpp:
+
+/usr/include/c++/9/bits/cpp_type_traits.h:
+
+/usr/include/c++/9/bits/locale_facets.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+_deps/json-src/include/nlohmann/detail/string_escape.hpp:
+
+_deps/googletest-src/googletest/include/gtest/gtest-test-part.h:
+
+/mnt/c/labs/laba5/mp_os/associative_container/include/associative_container.h:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
+
+_deps/json-src/include/nlohmann/json.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
+
+_deps/json-src/include/nlohmann/detail/output/binary_writer.hpp:
+
+/usr/include/c++/9/bits/locale_facets_nonio.tcc:
+
+/usr/include/x86_64-linux-gnu/asm/errno.h:
+
+/usr/include/c++/9/bits/istream.tcc:
+
+_deps/json-src/include/nlohmann/detail/iterators/json_reverse_iterator.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h:
+
+_deps/json-src/include/nlohmann/detail/meta/identity_tag.hpp:
+
+_deps/json-src/include/nlohmann/detail/meta/detected.hpp:
+
+/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_tree/tests/b_tree_tests.cpp:
+
+_deps/json-src/include/nlohmann/detail/iterators/iteration_proxy.hpp:
+
+/usr/include/stdio.h:
+
+_deps/json-src/include/nlohmann/detail/output/output_adapters.hpp:
+
+/mnt/c/labs/laba5/mp_os/associative_container/search_tree/include/search_tree.h:
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
 /usr/include/x86_64-linux-gnu/asm/posix_types_64.h:
 
+_deps/json-src/include/nlohmann/byte_container_with_subtype.hpp:
+
 /usr/include/c++/9/bits/memoryfwd.h:
 
-/mnt/c/labs/laba5/mp_os/allocator/allocator/include/allocator_guardant.h:
-
-_deps/googletest-src/googletest/include/gtest/gtest-printers.h:
-
-/usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h:
-
-_deps/googletest-src/googletest/include/gtest/gtest-message.h:
+_deps/json-src/include/nlohmann/detail/input/binary_reader.hpp:
 
 _deps/googletest-src/googletest/include/gtest/internal/gtest-port.h:
-
-/usr/include/c++/9/bits/locale_facets.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/locale.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/json_reverse_iterator.hpp:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/json.hpp:
 
 _deps/googletest-src/googletest/include/gtest/gtest-assertion-result.h:
 
 /usr/include/c++/9/bits/char_traits.h:
 
-_deps/googletest-src/googletest/include/gtest/internal/gtest-type-util.h:
+/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
-/usr/include/x86_64-linux-gnu/sys/wait.h:
-
-/usr/include/asm-generic/errno-base.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/include/asm-generic/types.h:
-
-/usr/include/x86_64-linux-gnu/bits/signum-generic.h:
-
-/usr/include/c++/9/bits/std_abs.h:
-
-/usr/include/c++/9/version:
-
-/usr/include/c++/9/ext/type_traits.h:
-
-_deps/googletest-src/googletest/include/gtest/gtest.h:
-
-/usr/include/x86_64-linux-gnu/c++/9/bits/cxxabi_tweaks.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
-_deps/googletest-src/googletest/include/gtest/gtest_pred_impl.h:
-
-/usr/include/c++/9/ext/numeric_traits.h:
-
-/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_tree/include/b_tree.h:
-
-/usr/include/c++/9/bits/stl_algobase.h:
+_deps/json-src/include/nlohmann/detail/meta/call_std/begin.hpp:
 
 /usr/include/c++/9/bits/hash_bytes.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/abi_macros.hpp:
+_deps/googletest-src/googletest/include/gtest/internal/gtest-type-util.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/c++/9/bits/ios_base.h:
+
+_deps/googletest-src/googletest/include/gtest/internal/gtest-filepath.h:
+
+_deps/json-src/include/nlohmann/detail/meta/std_fs.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
+
+_deps/json-src/include/nlohmann/detail/conversions/from_json.hpp:
+
+_deps/json-src/include/nlohmann/detail/iterators/iter_impl.hpp:
 
 /usr/include/c++/9/bits/allocator.h:
 
@@ -910,115 +915,89 @@ _deps/googletest-src/googletest/include/gtest/gtest_pred_impl.h:
 
 /usr/include/c++/9/bits/streambuf.tcc:
 
-/usr/include/c++/9/bits/basic_string.tcc:
+/usr/include/errno.h:
+
+_deps/json-src/include/nlohmann/detail/input/lexer.hpp:
+
+/usr/include/assert.h:
+
+/usr/include/c++/9/bits/forward_list.h:
+
+_deps/json-src/include/nlohmann/detail/conversions/to_json.hpp:
+
+/usr/include/features.h:
+
+/usr/include/c++/9/bits/codecvt.h:
 
 /usr/include/c++/9/cstddef:
 
-_deps/googletest-src/googletest/include/gtest/gtest-test-part.h:
+/usr/include/c++/9/bits/basic_string.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
 
-/usr/include/c++/9/bits/ios_base.h:
+/usr/include/asm-generic/bitsperlong.h:
 
-/usr/include/c++/9/exception:
+/usr/include/asm-generic/types.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/value_t.hpp:
+/usr/include/x86_64-linux-gnu/sys/wait.h:
 
-_deps/googletest-src/googletest/include/gtest/internal/gtest-filepath.h:
+/usr/include/asm-generic/errno-base.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/adl_serializer.hpp:
+/usr/include/x86_64-linux-gnu/bits/signum-generic.h:
 
-/usr/include/c++/9/bits/hashtable_policy.h:
+/usr/include/c++/9/bits/std_abs.h:
 
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
+/usr/include/c++/9/version:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/json_fwd.hpp:
+/usr/include/c++/9/ext/type_traits.h:
 
-_deps/googletest-src/googletest/include/gtest/internal/custom/gtest-printers.h:
+/mnt/c/labs/laba5/mp_os/associative_container/search_tree/indexing_tree/b_tree/include/b_tree.h:
 
-/usr/include/c++/9/algorithm:
+/usr/include/c++/9/bits/stl_algobase.h:
 
-/usr/include/c++/9/chrono:
+_deps/json-src/include/nlohmann/detail/exceptions.hpp:
 
-/usr/include/c++/9/bits/cpp_type_traits.h:
+/usr/include/c++/9/ostream:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/json_custom_base_class.hpp:
+/usr/include/c++/9/bits/gslice_array.h:
 
-/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
+/usr/include/c++/9/bits/stl_multiset.h:
 
-_deps/googletest-src/googletest/include/gtest/gtest-param-test.h:
+/usr/include/x86_64-linux-gnu/bits/sched.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/string_escape.hpp:
+/usr/include/c++/9/streambuf:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/macro_scope.hpp:
+_deps/json-src/include/nlohmann/detail/input/input_adapters.hpp:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/hash.hpp:
+/usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h:
 
-/usr/include/c++/9/bits/slice_array.h:
+_deps/json-src/include/nlohmann/detail/json_ref.hpp:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/output/binary_writer.hpp:
+_deps/googletest-src/googletest/include/gtest/gtest-message.h:
 
-/usr/include/x86_64-linux-gnu/c++/9/bits/c++locale.h:
+_deps/json-src/include/nlohmann/detail/input/parser.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/sigval_t.h:
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/conversions/from_json.hpp:
+_deps/json-src/include/nlohmann/detail/iterators/internal_iterator.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+_deps/json-src/include/nlohmann/detail/input/json_sax.hpp:
 
-_deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
+/usr/include/c++/9/list:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/binary_reader.hpp:
+_deps/json-src/include/nlohmann/detail/macro_scope.hpp:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/conversions/to_chars.hpp:
+_deps/googletest-src/googletest/include/gtest/internal/gtest-string.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/lexer.hpp:
+_deps/googletest-src/googletest/include/gtest/gtest.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
+/usr/include/x86_64-linux-gnu/c++/9/bits/cxxabi_tweaks.h:
 
-/usr/include/c++/9/bits/stl_relops.h:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/position_t.hpp:
+_deps/googletest-src/googletest/include/gtest/gtest_pred_impl.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/parser.hpp:
-
-/usr/include/asm-generic/posix_types.h:
-
-/usr/include/c++/9/system_error:
-
-/usr/include/c++/9/bits/ptr_traits.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/iter_impl.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/siginfo_t.h:
-
-/usr/include/c++/9/bits/exception_ptr.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/internal_iterator.hpp:
-
-/usr/include/c++/9/bits/nested_exception.h:
-
-/usr/include/c++/9/bits/indirect_array.h:
-
-/usr/include/c++/9/bits/valarray_before.h:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/input/json_sax.hpp:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/iterators/iterator_traits.hpp:
-
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/macro_unscope.hpp:
-
-/usr/include/c++/9/bits/algorithmfwd.h:
-
-/usr/include/c++/9/bits/list.tcc:
-
-/usr/include/c++/9/mutex:
-
-/usr/include/c++/9/bits/stringfwd.h:
-
-/usr/include/c++/9/bits/locale_classes.h:
-
-/usr/include/c++/9/stdlib.h:
+/usr/include/c++/9/ext/numeric_traits.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
@@ -1026,7 +1005,11 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/bits/locale_classes.tcc:
 
-/usr/include/c++/9/bits/locale_facets_nonio.tcc:
+/usr/include/x86_64-linux-gnu/c++/9/bits/ctype_inline.h:
+
+/usr/include/c++/9/bits/locale_facets.h:
+
+_deps/json-src/include/nlohmann/detail/input/position_t.hpp:
 
 /usr/include/c++/9/bits/localefwd.h:
 
@@ -1039,6 +1022,12 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 /usr/include/c++/9/bits/mask_array.h:
 
 /usr/include/c++/9/bits/stl_numeric.h:
+
+/usr/include/c++/9/bits/nested_exception.h:
+
+/usr/include/c++/9/bits/indirect_array.h:
+
+/usr/include/c++/9/bits/valarray_before.h:
 
 /usr/include/x86_64-linux-gnu/bits/stat.h:
 
@@ -1053,8 +1042,6 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 /usr/include/x86_64-linux-gnu/c++/9/bits/error_constants.h:
 
 /usr/include/c++/9/bits/quoted_string.h:
-
-/usr/include/c++/9/bits/random.h:
 
 /usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
@@ -1076,8 +1063,6 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/bits/shared_ptr_atomic.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/json_pointer.hpp:
-
 /usr/include/c++/9/ratio:
 
 /usr/include/x86_64-linux-gnu/bits/environments.h:
@@ -1086,11 +1071,9 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/bits/shared_ptr_base.h:
 
+/usr/include/c++/9/bits/slice_array.h:
+
 /usr/include/c++/9/bits/sstream.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
-
-/usr/include/c++/9/bits/std_function.h:
 
 /usr/include/c++/9/bits/cxxabi_forced.h:
 
@@ -1098,7 +1081,15 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/bits/stl_algo.h:
 
+_deps/json-src/include/nlohmann/detail/conversions/to_chars.hpp:
+
 /usr/include/c++/9/type_traits:
+
+/usr/include/c++/9/bits/functexcept.h:
+
+/usr/include/c++/9/bits/stl_map.h:
+
+/usr/include/c++/9/bits/stl_uninitialized.h:
 
 /usr/include/stdlib.h:
 
@@ -1120,9 +1111,11 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/bits/stl_pair.h:
 
-/usr/include/c++/9/bits/stl_set.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/conversions/to_json.hpp:
+/usr/include/c++/9/bits/stl_relops.h:
+
+/usr/include/c++/9/bits/stl_set.h:
 
 /usr/include/c++/9/bits/stl_multimap.h:
 
@@ -1132,9 +1125,9 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/cstdlib:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/json_ref.hpp:
-
 /usr/include/c++/9/bits/stl_tempbuf.h:
+
+_deps/json-src/include/nlohmann/detail/meta/type_traits.hpp:
 
 /usr/include/c++/9/bits/stream_iterator.h:
 
@@ -1170,13 +1163,9 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/cwctype:
 
+_deps/json-src/include/nlohmann/detail/meta/void_t.hpp:
+
 /usr/include/c++/9/random:
-
-/mnt/c/labs/laba5/mp_os/logger/logger/include/logger_builder.h:
-
-/usr/include/c++/9/memory:
-
-/usr/include/c++/9/cerrno:
 
 /usr/include/c++/9/unordered_map:
 
@@ -1216,9 +1205,13 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/ext/new_allocator.h:
 
+_deps/json-src/include/nlohmann/detail/json_pointer.hpp:
+
 /usr/include/c++/9/bits/stl_raw_storage_iter.h:
 
 /usr/include/c++/9/ext/string_conversions.h:
+
+_deps/json-src/include/nlohmann/detail/macro_unscope.hpp:
 
 /usr/include/c++/9/bits/allocated_ptr.h:
 
@@ -1232,8 +1225,6 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/iomanip:
 
-/mnt/c/labs/laba5/mp_os/logger/client_logger/include/nlohmann/detail/exceptions.hpp:
-
 /usr/include/c++/9/iosfwd:
 
 /usr/include/c++/9/bits/forward_list.tcc:
@@ -1244,15 +1235,21 @@ _deps/googletest-src/googletest/include/gtest/gtest-death-test.h:
 
 /usr/include/c++/9/locale:
 
+/mnt/c/labs/laba5/mp_os/logger/logger/include/logger_builder.h:
+
+/usr/include/c++/9/cerrno:
+
+/usr/include/c++/9/memory:
+
 /usr/include/c++/9/bits/locale_facets_nonio.h:
 
 /usr/include/c++/9/new:
 
 /usr/include/c++/9/set:
 
-/usr/include/x86_64-linux-gnu/bits/sched.h:
+/usr/include/asm-generic/posix_types.h:
 
-/usr/include/c++/9/streambuf:
+/usr/include/c++/9/system_error:
 
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
 
